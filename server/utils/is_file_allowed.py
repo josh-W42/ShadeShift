@@ -1,4 +1,4 @@
-from datatypes import ALLOWED_EXTENSIONS
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 
 def is_file_allowed(file_name: str) -> bool:
