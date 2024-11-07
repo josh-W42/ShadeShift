@@ -1,4 +1,5 @@
 import cv2
+import numpy
 from sklearn.cluster import KMeans
 from typing import List
 """
@@ -12,7 +13,7 @@ from typing import List
 """
 
 
-def extract_colors(image_path: str, num_colors: int) -> List[List[int]]:
+def extract_colors(image_path: str, num_colors: int) -> numpy.ndarray:
     """
     This function extracts num_colors amount of colors from an image with a given path.
 
@@ -26,8 +27,6 @@ def extract_colors(image_path: str, num_colors: int) -> List[List[int]]:
 
     image_width = image.shape[0]
     image_height = image.shape[1]
-
-    print(image.shape[0], image.shape[1])
 
     image = image.reshape((image_width * image_height, 3))
 
