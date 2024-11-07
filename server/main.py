@@ -42,7 +42,6 @@ def upload_image():
     try:
         image.save(path)
     except Exception as e:
-        remove_image(path)
         return jsonify({'error': 'Failed to save image', 'message': str(e)}), 500
 
     try:
