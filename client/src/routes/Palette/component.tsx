@@ -14,10 +14,12 @@ export const PalettePageComponent: FunctionComponent<Props> = ({ colors }) => {
           width: '100px',
           backgroundColor: color.hexa(),
         }}
+        key={color.hex()}
       >
         <p style={{ color: color.isDark() ? 'white' : 'black' }}>
           {color.keyword()}
         </p>
+        <p>{color.chroma()}</p>
       </div>
     ));
   };
