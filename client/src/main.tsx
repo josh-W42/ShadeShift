@@ -1,6 +1,5 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-// import App from './App.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Root } from './routes/Root/component.tsx';
 import { PalettePage } from './routes/Palette/container.tsx';
@@ -10,11 +9,13 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-  },
-  {
-    path: '/:sequence',
-    element: <PalettePage />,
-    errorElement: <NotFound />,
+    children: [
+      {
+        path: '/:sequence',
+        element: <PalettePage />,
+        errorElement: <NotFound />,
+      },
+    ],
   },
 ]);
 
