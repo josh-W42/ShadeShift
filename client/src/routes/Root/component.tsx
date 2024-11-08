@@ -1,6 +1,7 @@
 import { FunctionComponent, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { DEFAULT_THEME, ThemeContext } from '../../utils';
+import { TopNavBar } from '../../components';
 
 export const Root: FunctionComponent = () => {
   const [theme, setTheme] = useState(DEFAULT_THEME);
@@ -8,7 +9,7 @@ export const Root: FunctionComponent = () => {
   return (
     <div>
       <ThemeContext.Provider value={theme}>
-        <Link to={'generate'}>Generate</Link>
+        <TopNavBar />
         <Outlet />
       </ThemeContext.Provider>
     </div>
