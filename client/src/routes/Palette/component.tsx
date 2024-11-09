@@ -1,5 +1,7 @@
 import Color from 'color';
 import { FunctionComponent } from 'react';
+import './palette.css';
+import { copyToClipBoard } from '../../utils';
 
 interface Props {
   colors: Color<string>[];
@@ -7,26 +9,26 @@ interface Props {
 
 export const PalettePageComponent: FunctionComponent<Props> = ({ colors }) => {
   const getColors = () => {
-    return colors.map((color) => (
+    return colors.map((color, i) => (
       <div
+        className={`colorBlock ${color.isDark() ? 'darkBlock' : 'lightBlock'}`}
         style={{
-          height: '100px',
-          width: '100px',
           backgroundColor: color.hexa(),
         }}
-        key={color.hex()}
+        key={color.hex() + i}
       >
-        <p style={{ color: color.isDark() ? 'white' : 'black' }}>
-          {color.keyword()}
-        </p>
-        <p>{color.chroma()}</p>
+        <button onClick={() => copyToClipBoard(color.hex())}>Copy</button>
+        <button className="blockHexCode">{color.hex().slice(1)}</button>
+        <button className="blockSecondaryInfo">
+          {`rgb(${color.red()}, ${color.green()}, ${color.blue()})`}
+        </button>
       </div>
     ));
   };
 
   return (
     <div>
-      <div>{getColors()}</div>
+      <div id="colorContainer">{getColors()}</div>
     </div>
   );
 };
