@@ -17,4 +17,8 @@ export const DEFAULT_THEME: Theme = {
   darker: Color('#1BBA8A').l(10).chroma(20).hex(),
 };
 
-export const ThemeContext = createContext(DEFAULT_THEME);
+export const ThemeContext = createContext({
+  theme: DEFAULT_THEME,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setTheme: (_t: Theme) => {},
+});

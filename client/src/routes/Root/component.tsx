@@ -1,17 +1,12 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import { Outlet } from 'react-router-dom';
-import { DEFAULT_THEME, ThemeContext } from '../../utils';
 import { TopNavBar } from '../../components';
 
-export const Root: FunctionComponent = () => {
-  const [theme, setTheme] = useState(DEFAULT_THEME);
-
+export const RootComponent: FunctionComponent = () => {
   return (
     <div>
-      <ThemeContext.Provider value={theme}>
-        <TopNavBar />
-        <Outlet />
-      </ThemeContext.Provider>
+      <TopNavBar />
+      <Outlet />
     </div>
   );
 };

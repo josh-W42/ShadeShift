@@ -1,9 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Root } from './routes/Root/component.tsx';
+import { Root } from './routes/Root';
 import { PalettePage } from './routes/Palette/container.tsx';
 import { NotFound } from './components/index.ts';
+import './App.css';
 
 const router = createBrowserRouter([
   {
