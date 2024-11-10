@@ -23,7 +23,7 @@ export const PalettePage: FunctionComponent = () => {
       const color = getRandomColor();
       const newSequence: string[] = [];
 
-      const mono = createMonochromaticPalette(color, 7);
+      const mono = createMonochromaticPalette(color);
 
       for (const hex of mono) {
         newSequence.push(hex.slice(1));
@@ -49,12 +49,23 @@ export const PalettePage: FunctionComponent = () => {
       return;
     }
 
-    const result = [];
-    for (const color of sequence.split('-')) {
+    const result: Color[] = [];
+
+    const colorCodes = sequence.split('-');
+
+    if (colorCodes.length > 10) {
+      throw new Error('Too Many Colors');
+    }
+
+    for (const color of colorCodes) {
       const code = `#${color}`;
 
       if (!CSS.supports('color', code)) {
         throw new Error('Invalid Color');
+      }
+
+      if (result.filter((color) => color.hex() === code).length > 0) {
+        continue;
       }
 
       result.push(Color(code));
