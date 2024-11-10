@@ -8,7 +8,7 @@ interface Props {
 
 export const TopNavBarComponent: FunctionComponent<Props> = ({ theme }) => {
   return (
-    <div style={{ backgroundColor: theme.primary, padding: 0, margin: 0 }}>
+    <div id="topNavBar" style={{ backgroundColor: theme.primary }}>
       <Link to={'generate'}>
         <button
           style={{

@@ -26,9 +26,5 @@ export const PalettePageComponent: FunctionComponent<Props> = ({ colors }) => {
     ));
   };
 
-  return (
-    <div>
-      <div id="colorContainer">{getColors()}</div>
-    </div>
-  );
+  return <div id="colorContainer">{getColors()}</div>;
 };
