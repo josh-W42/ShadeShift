@@ -14,8 +14,14 @@ export const createMonochromaticPalette = (
   numColors: number = 10
 ) => {
   const result = [];
-  for (let i = 1; i <= numColors; i++) {
-    result.push(Color.lch(i * 10, baseColor.chroma(), baseColor.hue()).hex());
+  for (let i = 0; i < numColors; i++) {
+    result.push(
+      Color.lch(
+        (100 / numColors) * i,
+        baseColor.chroma(),
+        baseColor.hue()
+      ).hex()
+    );
   }
   return result;
 };
