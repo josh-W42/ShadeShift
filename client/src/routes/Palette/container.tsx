@@ -25,8 +25,8 @@ export const PalettePage: FunctionComponent = () => {
 
       const mono = createMonochromaticPalette(color);
 
-      for (const hex of mono) {
-        newSequence.push(hex.slice(1));
+      for (const color of mono) {
+        newSequence.push(color.hex().slice(1));
       }
 
       // const palettes = createScientificPalette(color);
