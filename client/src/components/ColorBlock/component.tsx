@@ -32,7 +32,19 @@ export const ColorBlockComponent: FC<Props> = ({
       );
     });
 
-    return <div className="colorBlock">{getShades}</div>;
+    return (
+      <div
+        className={`colorBlock ${color.isDark() ? 'darkBlock' : 'lightBlock'}`}
+      >
+        <button
+          style={{ background: color.hex() }}
+          onClick={() => toggleShowShades()}
+        >
+          Shades
+        </button>
+        {getShades}
+      </div>
+    );
   }
 
   return (

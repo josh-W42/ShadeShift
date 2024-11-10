@@ -14,7 +14,7 @@ button {
   background: transparent;
   padding: 5px;
   border: 0px;
-  border-radius: 10%;
+  cursor: pointer;
 }
 
 .lightBlock button {
