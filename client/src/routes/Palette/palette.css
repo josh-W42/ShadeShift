@@ -1,12 +1,13 @@
 #colorContainer {
   display: flex;
+  height: 95vh;
 }
 
 .colorBlock {
-  height: 500px;
   width: 100%;
-  align-content: center;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 button {
@@ -16,22 +17,38 @@ button {
   border-radius: 10%;
 }
 
-.lightBlock button,
 .lightBlock button {
   color: black;
 }
 
-.darkBlock button,
 .darkBlock button {
   color: white;
 }
 
-.lightBlock button:hover,
 .lightBlock button:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.darkBlock button:hover,
 .darkBlock button:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.shadeButton {
+  width: 100%;
+  border-radius: 0;
+  height: 100vh;
+}
+
+.hoverHex {
+  color: transparent;
+}
+
+.lightShade:hover .hoverHex,
+.lightShade:hover .currentShadeIndicator {
+  color: black;
+}
+
+.darkShade:hover .hoverHex,
+.darkShade .currentShadeIndicator {
+  color: white;
 }
