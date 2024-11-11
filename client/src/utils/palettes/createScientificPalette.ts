@@ -1,13 +1,6 @@
 import Color from 'color';
 import { adjustHue } from './adjustHue';
-
-const targetHueSteps = new Map([
-  ['analogous', [0, 30, 60]],
-  ['triadic', [0, 120, 240]],
-  ['tetradic', [0, 90, 180, 270]],
-  ['complementary', [0, 180]],
-  ['splitComplementary', [0, 150, 210]],
-]);
+import { targetHueSteps } from './types';
 
 /**
  * Generates a scientific palette based on the input color.
@@ -25,13 +18,7 @@ export const createScientificPalette = (color: Color) => {
     result.set(
       type,
       targetHueSteps.get(type)!.map((step) => {
-        const newColor = color.lch(
-          color.l(),
-          color.chroma(),
-          adjustHue(color.hue() + step)
-        );
-
-        return newColor;
+        return Color(color).hue(adjustHue(color.hue() + step));
       })
     );
   }
