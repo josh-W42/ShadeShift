@@ -6,9 +6,22 @@ export const enum ColorHarmonyType {
   splitComplementary = 'splitComplementary',
 }
 
-export const enum GenerationType {
+export const targetHueSteps = new Map([
+  [ColorHarmonyType.analogous, [0, 30, 60]],
+  [ColorHarmonyType.triadic, [0, 120, 240]],
+  [ColorHarmonyType.tetradic, [0, 90, 180, 270]],
+  [ColorHarmonyType.complementary, [0, 180]],
+  [ColorHarmonyType.splitComplementary, [0, 150, 210]],
+]);
+
+export enum GenerationType {
   random = 'random',
-  scientific = 'scientific',
-  discovery = 'discovery',
-  hueShift = 'hueShift',
+  monochromatic = 'monochromatic',
+  analogous = 'analogous',
+  triadic = 'triadic',
+  tetradic = 'tetradic',
+  complementary = 'complementary',
+  splitComplementary = 'splitComplementary',
+  // discovery = 'discovery',
+  // hueShift = 'hueShift',
 }
