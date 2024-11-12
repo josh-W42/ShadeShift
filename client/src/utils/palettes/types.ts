@@ -15,13 +15,13 @@ export const targetHueSteps = new Map([
 ]);
 
 export enum GenerationType {
-  random = 'random',
-  monochromatic = 'monochromatic',
-  analogous = 'analogous',
-  triadic = 'triadic',
-  tetradic = 'tetradic',
-  complementary = 'complementary',
-  splitComplementary = 'splitComplementary',
+  random = 'Random',
+  monochromatic = 'Monochromatic',
+  analogous = 'Analogous',
+  triadic = 'Triadic',
+  tetradic = 'Tetradic',
+  complementary = 'Complementary',
+  splitComplementary = 'Split Complementary',
   // discovery = 'discovery',
   // hueShift = 'hueShift',
 }

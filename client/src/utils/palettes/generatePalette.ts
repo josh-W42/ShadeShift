@@ -4,7 +4,7 @@ import { createScientificPalette } from './createScientificPalette';
 import { getRandomColor } from './getRandomColor';
 import { createMonochromaticPalette } from './createMonochromaticPalette';
 
-interface Options {
+export interface GeneratePaletteOptions {
   baseColor?: Color;
   type?: GenerationType;
   numColors?: number;
@@ -12,7 +12,7 @@ interface Options {
 }
 
 const randomOptions: GenerationType[] = (
-  [...Object.keys(GenerationType)] as GenerationType[]
+  [...Object.values(GenerationType)] as GenerationType[]
 ).filter((type) => type != GenerationType.random);
 
 /**
@@ -29,7 +29,9 @@ const randomOptions: GenerationType[] = (
  *   include: an array of colors to include in the palette
  * @returns an array of colors
  */
-export const generatePalette: (opt?: Options) => Color[] = (opt) => {
+export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
+  opt
+) => {
   if (opt === undefined) {
     opt = {
       baseColor: getRandomColor(),

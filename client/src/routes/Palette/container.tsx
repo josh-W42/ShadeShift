@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { PalettePageComponent } from './component';
 import { useNavigate, useParams } from 'react-router-dom';
 import Color from 'color';
-import { generatePalette } from '../../utils';
+import { generatePalette, parseGenerateQuery } from '../../utils';
 
 export const PalettePage: FunctionComponent = () => {
   const { sequence } = useParams();
@@ -15,8 +15,11 @@ export const PalettePage: FunctionComponent = () => {
     }
 
     if (sequence.includes('generate')) {
+      const query = new URLSearchParams(window.location.search);
+      const options = parseGenerateQuery(query);
+
       const newSequence: string[] = [];
-      const palette = generatePalette();
+      const palette = generatePalette(options);
 
       for (const color of palette) {
         newSequence.push(color.hex().slice(1));
@@ -27,7 +30,6 @@ export const PalettePage: FunctionComponent = () => {
     }
 
     const result: Color[] = [];
-
     const colorCodes = sequence.split('-');
 
     if (colorCodes.length > 10) {
