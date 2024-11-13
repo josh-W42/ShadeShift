@@ -20,7 +20,7 @@ export const createMonochromaticPalette = (
   const result: Color[] = [baseColor];
   const equalSplit = Math.round(100 / numColors);
 
-  while (left - equalSplit >= 0) {
+  while (left - equalSplit >= 0 && result.length < numColors) {
     result.push(Color(result[result.length - 1]).l(left - equalSplit));
     left -= equalSplit;
   }
@@ -28,7 +28,7 @@ export const createMonochromaticPalette = (
   result.reverse();
   let right = baseColor.l();
 
-  while (right + equalSplit <= 100) {
+  while (right + equalSplit <= 100 && result.length < numColors) {
     result.push(Color(result[result.length - 1].l(right + equalSplit)));
     right += equalSplit;
   }
