@@ -3,15 +3,15 @@ import { PaletteGenModalComponent } from './component';
 import { Context } from '../../utils';
 
 export const PaletteGenModal: FC = () => {
-  const [open, setOpen] = useState(false);
   const { genConfig } = useContext(Context);
+  const [open, setOpen] = useState(false);
+  const [color, setColor] = useState<string>(genConfig.value.color || '000000');
 
   return (
     <PaletteGenModalComponent
-      open={open}
-      toggleOpen={() => setOpen(!open)}
-      config={genConfig.value}
-      setGenConfig={genConfig.setConfig}
+      modalOpen={[open, () => setOpen(!open)]}
+      genConfig={[genConfig.value, genConfig.setConfig]}
+      genColor={[color, (hex) => setColor(hex)]}
     />
   );
 };

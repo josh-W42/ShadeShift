@@ -1,5 +1,6 @@
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
@@ -11,24 +12,34 @@ import {
   RadioGroup,
   Tooltip,
 } from '@mui/material';
+import ShuffleIcon from '@mui/icons-material/Shuffle';
+import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
 import { FC } from 'react';
 import { GenConfig, GenerationType } from '../../utils';
+import { DebounceInput } from '../DebouncedInput';
 
 interface Props {
-  open: boolean;
-  toggleOpen: () => void;
-  config: GenConfig;
-  setGenConfig: (config: GenConfig) => void;
+  modalOpen: [boolean, () => void];
+  genConfig: [GenConfig, (config: GenConfig) => void];
+  genColor: [string | undefined, (hex: string) => void];
 }
 
 export const PaletteGenModalComponent: FC<Props> = ({
-  open,
-  toggleOpen,
-  config,
-  setGenConfig,
+  modalOpen,
+  genConfig,
+  genColor,
 }) => {
+  const [open, toggleOpen] = modalOpen;
+  const [config, setGenConfig] = genConfig;
+  const [color, setColor] = genColor;
+
   const getGenTypes = [...Object.values(GenerationType)].map((type) => (
-    <FormControlLabel value={type} control={<Radio />} label={type} />
+    <FormControlLabel
+      key={type}
+      value={type}
+      control={<Radio />}
+      label={type}
+    />
   ));
 
   return (
@@ -41,6 +52,7 @@ export const PaletteGenModalComponent: FC<Props> = ({
       <Dialog
         open={open}
         onClose={() => toggleOpen()}
+        hideBackdrop
         PaperProps={{
           component: 'form',
         }}
@@ -53,15 +65,48 @@ export const PaletteGenModalComponent: FC<Props> = ({
               aria-labelledby="palette-type-label"
               value={config.type}
               name="palette-type-button-group"
-              onChange={(e) =>
+              onChange={(e) => {
                 setGenConfig({
                   ...config,
                   type: e.target.value as GenerationType,
-                })
-              }
+                });
+              }}
             >
               {getGenTypes}
             </RadioGroup>
+          </FormControl>
+          <FormControl>
+            <FormLabel id="palette-color-label">Base Color</FormLabel>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  icon={<ShuffleIcon />}
+                  checkedIcon={<ShuffleOnIcon />}
+                  checked={config.color === undefined}
+                  onChange={() => {
+                    setGenConfig({
+                      ...config,
+                      color: config.color ? undefined : color,
+                    });
+                  }}
+                />
+              }
+              label="Random"
+            />
+            <DebounceInput
+              type="color"
+              defaultValue={config.color ? `#${config.color}` : `#${color}`}
+              disabled={config.color ? false : true}
+              placeholder="Type in here…"
+              debounceTimeout={300}
+              handleDebounce={(value) => {
+                setColor(value.slice(1));
+                setGenConfig({
+                  ...config,
+                  color: value.slice(1),
+                });
+              }}
+            />
           </FormControl>
         </DialogContent>
         <DialogActions>
