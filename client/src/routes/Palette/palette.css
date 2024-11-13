@@ -1,6 +1,7 @@
 #colorContainer {
   display: flex;
   height: 95vh;
+  max-height: 95vh;
 }
 
 .colorBlock {
@@ -36,7 +37,8 @@ button {
 .shadeButton {
   width: 100%;
   border-radius: 0;
-  height: 100vh;
+  height: 100px;
+  padding: 0px;
 }
 
 .hoverHex {

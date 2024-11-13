@@ -1,5 +1,5 @@
 import { Input, InputProps } from '@mui/material';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useRef } from 'react';
 
 type DebounceProps = {
   handleDebounce: (value: string) => void;

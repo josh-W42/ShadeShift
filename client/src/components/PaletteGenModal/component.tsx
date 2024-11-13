@@ -17,6 +17,7 @@ import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
 import { FC } from 'react';
 import { GenConfig, GenerationType } from '../../utils';
 import { DebounceInput } from '../DebouncedInput';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface Props {
   modalOpen: [boolean, () => void];
@@ -45,8 +46,12 @@ export const PaletteGenModalComponent: FC<Props> = ({
   return (
     <>
       <Tooltip title="Generator Settings">
-        <Button variant="outlined" onClick={() => toggleOpen()}>
-          G
+        <Button
+          startIcon={<SettingsIcon />}
+          variant="contained"
+          onClick={() => toggleOpen()}
+        >
+          Settings
         </Button>
       </Tooltip>
       <Dialog
