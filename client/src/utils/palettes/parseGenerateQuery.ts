@@ -23,6 +23,10 @@ export const parseGenerateQuery: (
   if (params.size < 1) return opts;
 
   for (const [key, value] of params.entries()) {
+    if (value === 'undefined' || value === '' || value === 'null') {
+      continue;
+    }
+
     switch (key) {
       case GenConfigParams.type:
         opts.type = value as GenerationType;
