@@ -1,10 +1,17 @@
 import { FunctionComponent, useState } from 'react';
-import { DEFAULT_THEME, Context, DEFAULT_CONFIG } from '../../utils';
+import {
+  DEFAULT_THEME,
+  Context,
+  DEFAULT_CONFIG,
+  ColorFormats,
+  SecondaryInfoContext,
+} from '../../utils';
 import { RootComponent } from './component';
 
 export const Root: FunctionComponent = () => {
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [genConfig, setGenConfig] = useState(DEFAULT_CONFIG);
+  const [format, setFormat] = useState(ColorFormats.rgb);
 
   return (
     <Context.Provider
@@ -13,7 +20,14 @@ export const Root: FunctionComponent = () => {
         genConfig: { value: genConfig, setConfig: setGenConfig },
       }}
     >
-      <RootComponent />
+      <SecondaryInfoContext.Provider
+        value={{
+          format,
+          setFormat,
+        }}
+      >
+        <RootComponent />
+      </SecondaryInfoContext.Provider>
     </Context.Provider>
   );
 };

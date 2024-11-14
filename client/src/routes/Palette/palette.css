@@ -18,6 +18,10 @@ button {
   cursor: pointer;
 }
 
+.blockSecondaryInfo {
+  background: transparent;
+}
+
 .lightBlock button {
   color: black;
 }
