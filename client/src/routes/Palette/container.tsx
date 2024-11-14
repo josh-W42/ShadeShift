@@ -3,6 +3,7 @@ import { PalettePageComponent } from './component';
 import { useNavigate, useParams } from 'react-router-dom';
 import Color from 'color';
 import { generatePalette, parseGenerateQuery } from '../../utils';
+import { History } from '../../classes';
 
 export const PalettePage: FunctionComponent = () => {
   const { sequence } = useParams();
@@ -26,6 +27,7 @@ export const PalettePage: FunctionComponent = () => {
       }
 
       navigate(`/${newSequence.join('-')}`);
+      History.empty();
       return;
     }
 
