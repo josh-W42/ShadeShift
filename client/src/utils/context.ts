@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import { DEFAULT_THEME, Theme } from './theme';
 import { DEFAULT_CONFIG, GenConfig } from './genConfig';
+import { ColorFormats } from './colors';
 
 export const Context = createContext({
   theme: {
@@ -13,4 +14,10 @@ export const Context = createContext({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setConfig: (_c: GenConfig) => {},
   },
+});
+
+export const SecondaryInfoContext = createContext({
+  format: ColorFormats.rgb,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setFormat: (_c: ColorFormats) => {},
 });
