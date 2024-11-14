@@ -25,6 +25,10 @@ interface Props {
   genColor: [string | undefined, (hex: string) => void];
 }
 
+const getGenTypes = [...Object.values(GenerationType)].map((type) => (
+  <FormControlLabel key={type} value={type} control={<Radio />} label={type} />
+));
+
 export const PaletteGenModalComponent: FC<Props> = ({
   modalOpen,
   genConfig,
@@ -33,15 +37,6 @@ export const PaletteGenModalComponent: FC<Props> = ({
   const [open, toggleOpen] = modalOpen;
   const [config, setGenConfig] = genConfig;
   const [color, setColor] = genColor;
-
-  const getGenTypes = [...Object.values(GenerationType)].map((type) => (
-    <FormControlLabel
-      key={type}
-      value={type}
-      control={<Radio />}
-      label={type}
-    />
-  ));
 
   return (
     <>
