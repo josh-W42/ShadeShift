@@ -1,7 +1,11 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { ColorBlockComponent } from './component';
 import Color from 'color';
-import { createMonochromaticPalette } from '../../utils';
+import {
+  copyToClipBoard,
+  createMonochromaticPalette,
+  NotificationContext,
+} from '../../utils';
 
 interface Props {
   color: Color;
@@ -9,8 +13,20 @@ interface Props {
 
 export const ColorBlock: FC<Props> = ({ color }) => {
   const [showShades, setShowShades] = useState(false);
+  const { notifications, setNotifications } = useContext(NotificationContext);
 
   const shades = createMonochromaticPalette(color, 25);
+  const handleCopy = () => {
+    setNotifications([
+      ...notifications,
+      {
+        message: 'Copied to Clipboard',
+        severity: 'success',
+        key: new Date().getTime(),
+      },
+    ]);
+    copyToClipBoard(color.hex());
+  };
 
   return (
     <ColorBlockComponent
@@ -18,6 +34,7 @@ export const ColorBlock: FC<Props> = ({ color }) => {
       showShades={showShades}
       toggleShowShades={() => setShowShades(!showShades)}
       shades={shades}
+      handleCopy={handleCopy}
     />
   );
 };

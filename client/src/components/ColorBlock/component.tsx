@@ -1,6 +1,5 @@
 import Color from 'color';
 import { FC } from 'react';
-import { copyToClipBoard } from '../../utils';
 import { SecondarySettingModal } from '../SecondarySettingModal';
 
 interface Props {
@@ -8,6 +7,7 @@ interface Props {
   showShades: boolean;
   toggleShowShades: () => void;
   shades: Color[];
+  handleCopy: () => void;
 }
 
 export const ColorBlockComponent: FC<Props> = ({
@@ -15,6 +15,7 @@ export const ColorBlockComponent: FC<Props> = ({
   showShades,
   toggleShowShades,
   shades,
+  handleCopy,
 }) => {
   if (showShades) {
     const getShades = shades.map((shade) => {
@@ -57,7 +58,7 @@ export const ColorBlockComponent: FC<Props> = ({
       key={color.hex()}
     >
       <button onClick={() => toggleShowShades()}>Shades</button>
-      <button onClick={() => copyToClipBoard(color.hex())}>Copy</button>
+      <button onClick={() => handleCopy()}>Copy</button>
       <button className="blockHexCode">{color.hex().slice(1)}</button>
       <SecondarySettingModal classes={'blockSecondaryInfo'} color={color} />
     </div>
