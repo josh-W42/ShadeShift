@@ -5,6 +5,8 @@ import {
   DEFAULT_CONFIG,
   ColorFormats,
   SecondaryInfoContext,
+  NotificationContext,
+  NotificationMessage,
 } from '../../utils';
 import { RootComponent } from './component';
 
@@ -12,6 +14,7 @@ export const Root: FunctionComponent = () => {
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [genConfig, setGenConfig] = useState(DEFAULT_CONFIG);
   const [format, setFormat] = useState(ColorFormats.rgb);
+  const [pack, setPack] = useState<NotificationMessage[]>([]);
 
   return (
     <Context.Provider
@@ -26,7 +29,14 @@ export const Root: FunctionComponent = () => {
           setFormat,
         }}
       >
-        <RootComponent />
+        <NotificationContext.Provider
+          value={{
+            notifications: pack,
+            setNotifications: setPack,
+          }}
+        >
+          <RootComponent />
+        </NotificationContext.Provider>
       </SecondaryInfoContext.Provider>
     </Context.Provider>
   );
