@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { PalettePageComponent } from './component';
 import { useNavigate, useParams } from 'react-router-dom';
 import Color from 'color';
-import { generatePalette, parseGenerateQuery } from '../../utils';
+import { generatePalette, getSequence, parseGenerateQuery } from '../../utils';
 import { History } from '../../classes';
 
 export const PalettePage: FunctionComponent = () => {
@@ -18,15 +18,9 @@ export const PalettePage: FunctionComponent = () => {
     if (sequence.includes('generate')) {
       const query = new URLSearchParams(window.location.search);
       const options = parseGenerateQuery(query);
-
-      const newSequence: string[] = [];
       const palette = generatePalette(options);
 
-      for (const color of palette) {
-        newSequence.push(color.hex().slice(1));
-      }
-
-      navigate(`/${newSequence.join('-')}`);
+      navigate(getSequence(palette));
       History.empty();
       return;
     }
