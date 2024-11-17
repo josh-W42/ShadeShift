@@ -58,3 +58,36 @@ button {
 .darkShade .currentShadeIndicator {
   color: white;
 }
+
+.minimalColorContainer {
+  display: flex;
+  height: 75px;
+  width: 100%;
+  border-radius: 2%;
+  overflow: hidden;
+}
+
+.minimal {
+  cursor: pointer;
+}
+
+.minimal button:hover {
+  background: inherit;
+}
+
+.minimal button:hover {
+  background: inherit;
+}
+
+.minimal .blockHexCode {
+  color: transparent;
+  font-weight: bolder;
+}
+
+.minimal:hover.darkBlock .blockHexCode {
+  color: white;
+}
+
+.minimal:hover.lightBlock .blockHexCode {
+  color: black;
+}
