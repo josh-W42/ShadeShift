@@ -8,6 +8,7 @@ interface Props {
   toggleShowShades: () => void;
   shades: Color[];
   handleCopy: () => void;
+  minimal?: boolean;
 }
 
 export const ColorBlockComponent: FC<Props> = ({
@@ -16,7 +17,25 @@ export const ColorBlockComponent: FC<Props> = ({
   toggleShowShades,
   shades,
   handleCopy,
+  minimal,
 }) => {
+  if (minimal) {
+    return (
+      <div
+        className={`colorBlock ${
+          color.isDark() ? 'darkBlock' : 'lightBlock'
+        } minimal`}
+        style={{
+          backgroundColor: color.hexa(),
+        }}
+        onClick={() => handleCopy()}
+        key={color.hex()}
+      >
+        <button className="blockHexCode">{color.hex().slice(1)}</button>
+      </div>
+    );
+  }
+
   if (showShades) {
     const getShades = shades.map((shade) => {
       return (

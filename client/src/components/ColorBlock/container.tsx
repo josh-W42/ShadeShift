@@ -9,9 +9,10 @@ import {
 
 interface Props {
   color: Color;
+  minimal?: boolean;
 }
 
-export const ColorBlock: FC<Props> = ({ color }) => {
+export const ColorBlock: FC<Props> = ({ color, minimal }) => {
   const [showShades, setShowShades] = useState(false);
   const { notifications, setNotifications } = useContext(NotificationContext);
 
@@ -35,6 +36,7 @@ export const ColorBlock: FC<Props> = ({ color }) => {
       toggleShowShades={() => setShowShades(!showShades)}
       shades={shades}
       handleCopy={handleCopy}
+      minimal={minimal}
     />
   );
 };
