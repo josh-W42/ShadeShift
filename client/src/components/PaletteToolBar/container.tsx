@@ -1,19 +1,13 @@
 import { FunctionComponent, useContext } from 'react';
 import { PaletteToolBarComponent } from './component';
-import { Context } from '../../utils';
+import { Context, getGenURL } from '../../utils';
 import { History } from '../../classes';
 import { useNavigate } from 'react-router-dom';
 
 export const PaletteToolBar: FunctionComponent = () => {
   const { theme, genConfig } = useContext(Context);
   const navigate = useNavigate();
-
-  const genQuery = [...Object.entries(genConfig.value)]
-    .map(([key, value]) => {
-      return `${key}=${value}`;
-    })
-    .join('&');
-  const genUrl = 'generate?' + genQuery;
+  const genUrl = getGenURL(genConfig.value);
 
   const handleUndo = (current: string) => {
     const last = History.goBack(current);
