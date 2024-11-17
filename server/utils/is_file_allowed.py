@@ -1,4 +1,4 @@
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
 
 def is_file_allowed(file_name: str) -> bool:
