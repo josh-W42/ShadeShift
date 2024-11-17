@@ -1,10 +1,10 @@
 import { FunctionComponent, useContext } from 'react';
-import { TopNavBarComponent } from './component';
+import { PaletteToolBarComponent } from './component';
 import { Context } from '../../utils';
 import { History } from '../../classes';
 import { useNavigate } from 'react-router-dom';
 
-export const TopNavBar: FunctionComponent = () => {
+export const PaletteToolBar: FunctionComponent = () => {
   const { theme, genConfig } = useContext(Context);
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ export const TopNavBar: FunctionComponent = () => {
   };
 
   return (
-    <TopNavBarComponent
+    <PaletteToolBarComponent
       theme={theme.value}
       genUrl={genUrl}
       handleUndo={handleUndo}

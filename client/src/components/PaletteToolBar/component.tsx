@@ -14,14 +14,14 @@ interface Props {
   handleRedo: (current: string) => void;
 }
 
-export const TopNavBarComponent: FunctionComponent<Props> = ({
+export const PaletteToolBarComponent: FunctionComponent<Props> = ({
   theme,
   genUrl,
   handleUndo,
   handleRedo,
 }) => {
   return (
-    <div id="topNavBar" style={{ backgroundColor: theme.primary }}>
+    <div id="paletteToolBar" style={{ backgroundColor: theme.primary }}>
       <ButtonGroup variant="contained">
         <Link to={genUrl}>
           <Button
