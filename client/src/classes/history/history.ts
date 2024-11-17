@@ -64,7 +64,15 @@ export class History {
    * Resets the redo stack. This is called after a user goes back, and then makes a new sequence
    * so that they can't redo back to the old sequences.
    */
+  public static emptyRedo() {
+    this.outStack = [];
+  }
+
+  /**
+   * Empties both the undo and redo stacks.
+   */
   public static empty() {
     this.outStack = [];
+    this.inStack = [];
   }
 }

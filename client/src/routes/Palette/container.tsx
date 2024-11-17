@@ -19,9 +19,8 @@ export const PalettePage: FunctionComponent = () => {
       const query = new URLSearchParams(window.location.search);
       const options = parseGenerateQuery(query);
       const palette = generatePalette(options);
-
       navigate(getSequence(palette));
-      History.empty();
+      History.emptyRedo();
       return;
     }
 
