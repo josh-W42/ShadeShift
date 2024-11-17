@@ -6,3 +6,4 @@ export * from './DebouncedInput';
 export * from './SecondarySettingModal';
 export * from './Notification';
 export * from './ImagePaletteProducer';
+export * from './TopNavBar';
