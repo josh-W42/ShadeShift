@@ -15,6 +15,10 @@ const randomOptions: GenerationType[] = (
   [...Object.values(GenerationType)] as GenerationType[]
 ).filter((type) => type != GenerationType.random);
 
+// const examples = '947766-B49D94-4D342C-DFD7D9-7D513C'
+//   .split('-')
+//   .map((hex) => Color(`#${hex}`));
+
 /**
  * Generates a color palette given a base color and type.
  *
@@ -81,6 +85,14 @@ export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
       return createScientificPalette(opt.baseColor).get(
         ColorHarmonyType.splitComplementary
       )!;
+
+    // // Case Deemed not Ready
+    // case GenerationType.discoveryRandom:
+    //   return createDiscoveryPalette(examples).get(
+    //     [...targetHueSteps.keys()][
+    //       Math.floor(Math.random() * targetHueSteps.size)
+    //     ]
+    //   )!;
 
     default:
       return generatePalette({

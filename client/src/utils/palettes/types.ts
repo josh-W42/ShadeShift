@@ -22,6 +22,6 @@ export enum GenerationType {
   tetradic = 'Tetradic',
   complementary = 'Complementary',
   splitComplementary = 'Split Complementary',
-  // discovery = 'discovery',
+  // discoveryRandom = 'Discovery Random', Not Ready
   // hueShift = 'hueShift',
 }
