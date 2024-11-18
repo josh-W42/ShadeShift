@@ -1,13 +1,19 @@
-import { FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent, useContext, useEffect, useState } from 'react';
 import { PalettePageComponent } from './component';
 import { useNavigate, useParams } from 'react-router-dom';
 import Color from 'color';
-import { generatePalette, getSequence, parseGenerateQuery } from '../../utils';
+import {
+  generatePalette,
+  getSequence,
+  PaletteContext,
+  parseGenerateQuery,
+} from '../../utils';
 import { History } from '../../classes';
 
 export const PalettePage: FunctionComponent = () => {
   const { sequence } = useParams();
   const [colors, setColors] = useState<Color<string>[]>([]);
+  const { palette: globalPalette } = useContext(PaletteContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +25,7 @@ export const PalettePage: FunctionComponent = () => {
       const query = new URLSearchParams(window.location.search);
       const options = parseGenerateQuery(query);
       const palette = generatePalette(options);
+      globalPalette.setPalette(palette);
       navigate(getSequence(palette));
       History.emptyRedo();
       return;

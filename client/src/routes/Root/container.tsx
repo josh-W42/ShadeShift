@@ -7,14 +7,18 @@ import {
   SecondaryInfoContext,
   NotificationContext,
   NotificationMessage,
+  PaletteContext,
 } from '../../utils';
 import { RootComponent } from './component';
+import Color from 'color';
 
 export const Root: FunctionComponent = () => {
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [genConfig, setGenConfig] = useState(DEFAULT_CONFIG);
   const [format, setFormat] = useState(ColorFormats.rgb);
   const [pack, setPack] = useState<NotificationMessage[]>([]);
+  const [currentPalette, setCurrentPalette] = useState<Color[]>([]);
+  const [viewModal, setViewModal] = useState(false);
 
   return (
     <Context.Provider
@@ -35,7 +39,20 @@ export const Root: FunctionComponent = () => {
             setNotifications: setPack,
           }}
         >
-          <RootComponent />
+          <PaletteContext.Provider
+            value={{
+              palette: {
+                current: currentPalette,
+                setPalette: setCurrentPalette,
+              },
+              viewModal: {
+                isOpen: viewModal,
+                setOpen: setViewModal,
+              },
+            }}
+          >
+            <RootComponent />
+          </PaletteContext.Provider>
         </NotificationContext.Provider>
       </SecondaryInfoContext.Provider>
     </Context.Provider>
