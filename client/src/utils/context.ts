@@ -3,6 +3,7 @@ import { DEFAULT_THEME, Theme } from './theme';
 import { DEFAULT_CONFIG, GenConfig } from './genConfig';
 import { ColorFormats } from './colors';
 import { NotificationMessage } from './notifications';
+import Color from 'color';
 
 export const Context = createContext({
   theme: {
@@ -27,4 +28,24 @@ export const NotificationContext = createContext({
   notifications: [] as NotificationMessage[],
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setNotifications: (_a: NotificationMessage[]) => {},
+});
+
+export const PaletteContext = createContext<{
+  palette: {
+    current: Color[];
+    setPalette: (_p: Color[]) => void;
+  };
+  viewModal: {
+    isOpen: boolean;
+    setOpen: (_b: boolean) => void;
+  };
+}>({
+  palette: {
+    current: [],
+    setPalette: () => {},
+  },
+  viewModal: {
+    isOpen: false,
+    setOpen: () => {},
+  },
 });
