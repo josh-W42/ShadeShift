@@ -2,6 +2,7 @@ import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
 import { History } from '../../classes';
+import { ViewPaletteModal } from '../ViewPaletteModal';
 
 interface Props {
   genUrl: string;
@@ -15,6 +16,7 @@ export const TopNavBarComponent: FC<Props> = ({ genUrl }) => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Shade Shift
           </Typography>
+          <ViewPaletteModal />
           <Link to={genUrl}>
             <Button
               onClick={() => {
