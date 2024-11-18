@@ -1,6 +1,7 @@
 export enum ColorFormats {
-  rgb = 'RGB',
+  hex = 'Hex',
   name = 'Name',
+  rgb = 'RGB',
   hsl = 'HSL',
   hsv = 'HSV',
   cmyk = 'CMYL',
