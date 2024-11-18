@@ -5,6 +5,7 @@ import { PaletteGenModal } from '../PaletteGenModal';
 import { Button, ButtonGroup, IconButton, Tooltip } from '@mui/material';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { History } from '../../classes';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   genUrl: string;
   handleUndo: (current: string) => void;
   handleRedo: (current: string) => void;
+  openViewModal: () => void;
 }
 
 export const PaletteToolBarComponent: FunctionComponent<Props> = ({
@@ -19,6 +21,7 @@ export const PaletteToolBarComponent: FunctionComponent<Props> = ({
   genUrl,
   handleUndo,
   handleRedo,
+  openViewModal,
 }) => {
   return (
     <div id="paletteToolBar" style={{ backgroundColor: theme.primary }}>
@@ -54,6 +57,15 @@ export const PaletteToolBarComponent: FunctionComponent<Props> = ({
             onClick={() => handleRedo(window.location.pathname)}
           >
             <RedoIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="View Palette">
+          <IconButton
+            onClick={() => {
+              openViewModal();
+            }}
+          >
+            <VisibilityIcon />
           </IconButton>
         </Tooltip>
       </ButtonGroup>
