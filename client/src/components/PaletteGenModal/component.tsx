@@ -76,37 +76,41 @@ export const PaletteGenModalComponent: FC<Props> = ({
             </RadioGroup>
           </FormControl>
           <FormControl>
-            <FormLabel id="palette-color-label">Base Color</FormLabel>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  icon={<ShuffleIcon />}
-                  checkedIcon={<ShuffleOnIcon />}
-                  checked={config.color === undefined}
-                  onChange={() => {
-                    setGenConfig({
-                      ...config,
-                      color: config.color ? undefined : color,
-                    });
-                  }}
-                />
-              }
-              label="Random"
-            />
-            <DebounceInput
-              type="color"
-              defaultValue={config.color ? `#${config.color}` : `#${color}`}
-              disabled={config.color ? false : true}
-              placeholder="Type in here…"
-              debounceTimeout={300}
-              handleDebounce={(value) => {
-                setColor(value.slice(1));
-                setGenConfig({
-                  ...config,
-                  color: value.slice(1),
-                });
-              }}
-            />
+            <FormControl>
+              <FormLabel id="palette-color-label">Base Color</FormLabel>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    icon={<ShuffleIcon />}
+                    checkedIcon={<ShuffleOnIcon />}
+                    checked={config.color === undefined}
+                    onChange={() => {
+                      setGenConfig({
+                        ...config,
+                        color: config.color ? undefined : color,
+                      });
+                    }}
+                  />
+                }
+                label="Random"
+              />
+            </FormControl>
+            <FormControl>
+              <DebounceInput
+                type="color"
+                defaultValue={config.color ? `#${config.color}` : `#${color}`}
+                disabled={config.color ? false : true}
+                placeholder="Type in here…"
+                debounceTimeout={300}
+                handleDebounce={(value) => {
+                  setColor(value.slice(1));
+                  setGenConfig({
+                    ...config,
+                    color: value.slice(1),
+                  });
+                }}
+              />
+            </FormControl>
           </FormControl>
         </DialogContent>
         <DialogActions>
