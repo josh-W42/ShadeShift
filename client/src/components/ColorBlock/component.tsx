@@ -1,6 +1,7 @@
 import Color from 'color';
 import { FC } from 'react';
 import { SecondarySettingModal } from '../SecondarySettingModal';
+import { Box, Button } from '@mui/material';
 
 interface Props {
   color: Color;
@@ -9,6 +10,7 @@ interface Props {
   shades: Color[];
   handleCopy: () => void;
   minimal?: boolean;
+  onClick?: () => void;
 }
 
 export const ColorBlockComponent: FC<Props> = ({
@@ -18,21 +20,28 @@ export const ColorBlockComponent: FC<Props> = ({
   shades,
   handleCopy,
   minimal,
+  onClick,
 }) => {
   if (minimal) {
     return (
-      <div
+      <Button
+        disableElevation
+        disableTouchRipple
         className={`colorBlock ${
           color.isDark() ? 'darkBlock' : 'lightBlock'
         } minimal`}
-        style={{
+        sx={{
           backgroundColor: color.hexa(),
+          borderRadius: 0,
         }}
-        onClick={() => handleCopy()}
+        onClick={() => {
+          if (onClick) onClick();
+          handleCopy();
+        }}
         key={color.hex()}
       >
-        <button className="blockHexCode">{color.hex().slice(1)}</button>
-      </div>
+        <Box className="blockHexCode">{color.hex().slice(1)}</Box>
+      </Button>
     );
   }
 
@@ -54,22 +63,22 @@ export const ColorBlockComponent: FC<Props> = ({
     });
 
     return (
-      <div
+      <Box
         className={`colorBlock ${color.isDark() ? 'darkBlock' : 'lightBlock'}`}
       >
-        <button
+        <Button
           style={{ background: color.hex() }}
           onClick={() => toggleShowShades()}
         >
           Shades
-        </button>
+        </Button>
         {getShades}
-      </div>
+      </Box>
     );
   }
 
   return (
-    <div
+    <Box
       className={`colorBlock ${color.isDark() ? 'darkBlock' : 'lightBlock'}`}
       style={{
         backgroundColor: color.hexa(),
@@ -80,6 +89,6 @@ export const ColorBlockComponent: FC<Props> = ({
       <button onClick={() => handleCopy()}>Copy</button>
       <button className="blockHexCode">{color.hex().slice(1)}</button>
       <SecondarySettingModal classes={'blockSecondaryInfo'} color={color} />
-    </div>
+    </Box>
   );
 };

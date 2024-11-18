@@ -10,14 +10,18 @@ import {
 interface Props {
   color: Color;
   minimal?: boolean;
+  noCopy?: boolean;
+  onClick?: () => void;
 }
 
-export const ColorBlock: FC<Props> = ({ color, minimal }) => {
+export const ColorBlock: FC<Props> = ({ color, minimal, noCopy, onClick }) => {
   const [showShades, setShowShades] = useState(false);
   const { notifications, setNotifications } = useContext(NotificationContext);
 
   const shades = createMonochromaticPalette(color, 25);
   const handleCopy = () => {
+    if (noCopy) return;
+
     setNotifications([
       ...notifications,
       {
@@ -37,6 +41,7 @@ export const ColorBlock: FC<Props> = ({ color, minimal }) => {
       shades={shades}
       handleCopy={handleCopy}
       minimal={minimal}
+      onClick={onClick}
     />
   );
 };
