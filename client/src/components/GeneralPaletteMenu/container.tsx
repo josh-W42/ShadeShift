@@ -1,8 +1,8 @@
-import { FC, MouseEvent, useState } from 'react';
+import { FC, MouseEvent, useContext, useState } from 'react';
 import { GeneralPaletteMenuComponent } from './component';
 import { useNavigate } from 'react-router-dom';
 import Color from 'color';
-import { getSequence } from '../../utils';
+import { getSequence, PaletteContext } from '../../utils';
 
 interface Props {
   palette: Color[];
@@ -10,6 +10,8 @@ interface Props {
 
 export const GeneralPaletteMenu: FC<Props> = ({ palette }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { viewModal, palette: globalPalette } = useContext(PaletteContext);
+
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
@@ -25,11 +27,17 @@ export const GeneralPaletteMenu: FC<Props> = ({ palette }) => {
     navigate(getSequence(palette));
   };
 
+  const handleViewModalTrigger = () => {
+    viewModal.setOpen(true);
+    globalPalette.setPalette(palette);
+  };
+
   return (
     <GeneralPaletteMenuComponent
       onClick={handleClick}
       onClose={handleClose}
       handleNavigate={handleNavigate}
+      openViewModal={handleViewModalTrigger}
       anchorEl={anchorEl}
       open={open}
     />
