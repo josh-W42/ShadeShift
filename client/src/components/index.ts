@@ -7,3 +7,6 @@ export * from './SecondarySettingModal';
 export * from './Notification';
 export * from './ImagePaletteProducer';
 export * from './TopNavBar';
+export * from './ViewPaletteModal';
+export * from './GeneralPaletteMenu';
+export * from './ViewPaletteModal';
