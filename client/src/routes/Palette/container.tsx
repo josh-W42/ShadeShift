@@ -25,7 +25,6 @@ export const PalettePage: FunctionComponent = () => {
       const query = new URLSearchParams(window.location.search);
       const options = parseGenerateQuery(query);
       const palette = generatePalette(options);
-      globalPalette.setPalette(palette);
       navigate(getSequence(palette));
       History.emptyRedo();
       return;
@@ -53,6 +52,7 @@ export const PalettePage: FunctionComponent = () => {
     }
 
     setColors(result);
+    globalPalette.setPalette(result);
   }, [sequence]);
 
   return <PalettePageComponent colors={colors} />;
