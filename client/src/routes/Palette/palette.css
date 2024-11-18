@@ -36,6 +36,7 @@ button {
 
 .darkBlock button:hover {
   background: rgba(255, 255, 255, 0.1);
+  font-weight: bolder;
 }
 
 .shadeButton {
@@ -71,23 +72,29 @@ button {
   cursor: pointer;
 }
 
-.minimal button:hover {
-  background: inherit;
-}
-
-.minimal button:hover {
-  background: inherit;
-}
-
 .minimal .blockHexCode {
   color: transparent;
   font-weight: bolder;
+  background: inherit;
+  border: 0px solid;
 }
 
-.minimal:hover.darkBlock .blockHexCode {
+.minimal:hover.darkBlock .blockHexCode,
+.minimal:focus.darkBlock .blockHexCode {
   color: white;
 }
 
-.minimal:hover.lightBlock .blockHexCode {
+.minimal:hover.lightBlock .blockHexCode,
+.minimal:focus.lightBlock .blockHexCode {
   color: black;
+}
+
+.viewModalBtn .viewModalCopyLabel {
+  color: transparent;
+}
+
+.viewModalBtn:hover .viewModalCopyLabel,
+.viewModalBtn:focus .viewModalCopyLabel {
+  color: inherit;
+  transition: 0.5s;
 }
