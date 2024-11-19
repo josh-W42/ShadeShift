@@ -11,6 +11,7 @@ interface Props {
   handleCopy: () => void;
   minimal?: boolean;
   onClick?: () => void;
+  handleShadeClick: (color: Color) => void;
 }
 
 export const ColorBlockComponent: FC<Props> = ({
@@ -20,6 +21,7 @@ export const ColorBlockComponent: FC<Props> = ({
   shades,
   handleCopy,
   minimal,
+  handleShadeClick,
   onClick,
 }) => {
   if (minimal) {
@@ -48,26 +50,42 @@ export const ColorBlockComponent: FC<Props> = ({
   if (showShades) {
     const getShades = shades.map((shade) => {
       return (
-        <button
+        <Button
+          key={shade.hexa()}
+          disableElevation
+          onClick={() => handleShadeClick(shade)}
           className={`shadeButton ${
             shade.isDark() ? 'darkShade' : 'lightShade'
           }`}
-          style={{ background: shade.hexa(), border: '0px' }}
+          style={{
+            background: shade.hexa(),
+            border: '0px',
+            padding: 0,
+            borderRadius: 0,
+            height: '200px',
+          }}
         >
-          <span className="hoverHex">{shade.hex()}</span>
-          <span className="currentShadeIndicator">
-            {shade.hex() === color.hex() ? '*' : ''}
+          <span className="hoverHex">
+            {shade.hex() === color.hex() ? '' : shade.hex()}
           </span>
-        </button>
+          <span className="currentShadeIndicator">
+            {shade.hex() === color.hex() ? 'Current' : ''}
+          </span>
+        </Button>
       );
     });
 
     return (
       <Box
+        sx={{ width: '100%', height: '95vh', padding: 0 }}
         className={`colorBlock ${color.isDark() ? 'darkBlock' : 'lightBlock'}`}
       >
         <Button
-          style={{ background: color.hex() }}
+          style={{
+            background: color.hex(),
+            borderRadius: 0,
+            textTransform: 'capitalize',
+          }}
           onClick={() => toggleShowShades()}
         >
           Shades

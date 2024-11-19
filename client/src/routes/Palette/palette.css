@@ -41,21 +41,33 @@ button {
 .shadeButton {
   width: 100%;
   border-radius: 0;
-  height: 100px;
+  height: 200px;
   padding: 0px;
+}
+
+.shadeButton:hover {
+  background: inherit;
 }
 
 .hoverHex {
   color: transparent;
 }
 
+.currentShadeIndicator {
+  text-transform: capitalize;
+}
+
 .lightShade:hover .hoverHex,
-.lightShade:hover .currentShadeIndicator {
+.lightShade:focus .hoverHex,
+.lightShade:hover .currentShadeIndicator,
+.lightShade:focus .currentShadeIndicator {
   color: black;
 }
 
 .darkShade:hover .hoverHex,
-.darkShade .currentShadeIndicator {
+.darkShade:focus .hoverHex,
+.darkShade:hover .currentShadeIndicator,
+.darkShade:focus .currentShadeIndicator {
   color: white;
 }
 

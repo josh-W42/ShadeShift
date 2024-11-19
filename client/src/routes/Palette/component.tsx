@@ -9,8 +9,8 @@ interface Props {
 
 export const PalettePageComponent: FunctionComponent<Props> = ({ colors }) => {
   const getColors = () => {
-    return colors.map((color) => (
-      <ColorBlock key={color.hexa()} color={color} />
+    return colors.map((color, i) => (
+      <ColorBlock key={color.hexa()} color={color} index={i} />
     ));
   };
   return (
