@@ -17,7 +17,7 @@ export const TopNavBarComponent: FC<Props> = ({ genUrl }) => {
             Shade Shift
           </Typography>
           <ViewPaletteModal />
-          <Link to={genUrl}>
+          <Link to={genUrl} tabIndex={-1}>
             <Button
               onClick={() => {
                 if (window.location.pathname.includes('-')) {
@@ -25,12 +25,12 @@ export const TopNavBarComponent: FC<Props> = ({ genUrl }) => {
                 }
               }}
               variant="contained"
-              sx={{ textTransform: 'capitalize' }}
+              sx={{ textTransform: 'capitalize', margin: '0 25px' }}
             >
               Palette Creator
             </Button>
           </Link>
-          <Link to={'/image'}>
+          <Link to={'/image'} tabIndex={-1}>
             <Button
               onClick={() => {
                 History.empty();

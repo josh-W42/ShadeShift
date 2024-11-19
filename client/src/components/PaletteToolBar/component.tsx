@@ -26,7 +26,7 @@ export const PaletteToolBarComponent: FunctionComponent<Props> = ({
   return (
     <div id="paletteToolBar" style={{ backgroundColor: theme.primary }}>
       <ButtonGroup variant="contained">
-        <Link to={genUrl}>
+        <Link to={genUrl} tabIndex={-1}>
           <Button
             onClick={() => {
               History.save(window.location.pathname);

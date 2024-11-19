@@ -70,9 +70,9 @@ export const ImagePaletteProducerComponent: FC<Props> = ({
               component="label"
               role={undefined}
               variant="contained"
-              tabIndex={-1}
               startIcon={<CloudUpload />}
               size="large"
+              tabIndex={-1}
             >
               Upload
               <input
