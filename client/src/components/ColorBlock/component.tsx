@@ -12,6 +12,7 @@ interface Props {
   minimal?: boolean;
   onClick?: () => void;
   handleShadeClick: (color: Color) => void;
+  handleRemove: () => void;
 }
 
 export const ColorBlockComponent: FC<Props> = ({
@@ -22,6 +23,7 @@ export const ColorBlockComponent: FC<Props> = ({
   handleCopy,
   minimal,
   handleShadeClick,
+  handleRemove,
   onClick,
 }) => {
   if (minimal) {
@@ -63,6 +65,7 @@ export const ColorBlockComponent: FC<Props> = ({
             padding: 0,
             borderRadius: 0,
             height: '200px',
+            transition: '2s',
           }}
         >
           <span className="hoverHex">
@@ -104,6 +107,7 @@ export const ColorBlockComponent: FC<Props> = ({
       key={color.hex()}
     >
       <button onClick={() => toggleShowShades()}>Shades</button>
+      <button onClick={() => handleRemove()}>Remove</button>
       <button onClick={() => handleCopy()}>Copy</button>
       <button className="blockHexCode">{color.hex().slice(1)}</button>
       <SecondarySettingModal classes={'blockSecondaryInfo'} color={color} />

@@ -59,6 +59,23 @@ export const ColorBlock: FC<Props> = ({
     navigate(sequence.join('-'));
   };
 
+  const handleRemove = () => {
+    if (index === undefined) return;
+
+    let sequence = window.location.pathname.split('-');
+
+    if (index > 0) {
+      sequence.splice(index, 1);
+    } else {
+      sequence = sequence.slice(1);
+      sequence[0] = `/${sequence[0]}`;
+    }
+
+    History.emptyRedo();
+    History.save(window.location.pathname);
+    navigate(sequence.join('-'));
+  };
+
   return (
     <ColorBlockComponent
       color={color}
@@ -69,6 +86,7 @@ export const ColorBlock: FC<Props> = ({
       minimal={minimal}
       onClick={onClick}
       handleShadeClick={handleShadeClick}
+      handleRemove={handleRemove}
     />
   );
 };
