@@ -1,15 +1,16 @@
-import os.path
+import os
 import time
 
 from flask import Flask, request, jsonify
 from utils import extract_colors, is_file_allowed, remove_image
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+import models
 
-UPLOAD_FOLDER = './temp'
 
+base_dir = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = os.path.join(base_dir, './temp')
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 CORS(app, resources={
     r'/api/*': {
@@ -17,6 +18,14 @@ CORS(app, resources={
     }
 })
 
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(base_dir, 'database.db')
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+models.db.init_app(app)
+
+with app.app_context():
+    models.db.create_all()
 
 @app.route('/')
 def hello_world():
@@ -52,6 +61,16 @@ def upload_image():
     except Exception as e:
         remove_image(path)
         return jsonify({'error': 'Failed to extract color data from image', 'message': str(e)}), 500
+
+
+@app.route('/api/users')
+def get_users():
+    try:
+        users = models.User.query.all()
+        return jsonify({'data': users}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Failed to get users', 'message': str(e)}), 500
 
 
 if __name__ == '__main__':
