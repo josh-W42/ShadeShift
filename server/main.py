@@ -5,12 +5,18 @@ from flask import Flask, request, jsonify
 from utils import extract_colors, is_file_allowed, remove_image
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
-import models
+from models import db, User, Palette
+from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_FOLDER = os.path.join(base_dir, './temp')
 app = Flask(__name__)
+app.secret_key = os.environ.get('API_SECRET')
+migrate = Migrate(app, db)
+bcrypt = Bcrypt(app)
+
 
 CORS(app, resources={
     r'/api/*': {
@@ -22,10 +28,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(base_dir, 'd
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-models.db.init_app(app)
+db.init_app(app)
 
 with app.app_context():
-    models.db.create_all()
+    db.create_all()
 
 @app.route('/')
 def hello_world():
@@ -66,11 +72,17 @@ def upload_image():
 @app.route('/api/users')
 def get_users():
     try:
-        users = models.User.query.all()
+        users = User.query.all()
         return jsonify({'data': users}), 200
     except Exception as e:
         print(e)
         return jsonify({'error': 'Failed to get users', 'message': str(e)}), 500
+
+# @app.route('/api/users/create', methods=["POST"])
+# def user_create():
+#     user = User(
+#         username=request.form['username']
+#     )
 
 
 if __name__ == '__main__':
