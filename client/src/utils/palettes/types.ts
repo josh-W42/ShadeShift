@@ -1,3 +1,5 @@
+import { UserData } from '../user';
+
 export const enum ColorHarmonyType {
   analogous = 'analogous',
   triadic = 'triadic',
@@ -24,4 +26,10 @@ export enum GenerationType {
   splitComplementary = 'Split Complementary',
   // discoveryRandom = 'Discovery Random', Not Ready
   // hueShift = 'hueShift',
+}
+
+export interface PaletteData {
+  id: string;
+  colors: string;
+  users?: UserData[];
 }

@@ -5,3 +5,4 @@ export * from './context';
 export * from './genConfig';
 export * from './colors';
 export * from './notifications';
+export * from './user';
