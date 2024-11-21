@@ -10,3 +10,4 @@ export * from './TopNavBar';
 export * from './ViewPaletteModal';
 export * from './GeneralPaletteMenu';
 export * from './ViewPaletteModal';
+export * from './SignUpModal';

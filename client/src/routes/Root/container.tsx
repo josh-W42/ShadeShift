@@ -19,12 +19,14 @@ export const Root: FunctionComponent = () => {
   const [pack, setPack] = useState<NotificationMessage[]>([]);
   const [currentPalette, setCurrentPalette] = useState<Color[]>([]);
   const [viewModal, setViewModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
 
   return (
     <Context.Provider
       value={{
         theme: { value: theme, setTheme },
         genConfig: { value: genConfig, setConfig: setGenConfig },
+        signUpModal: { isOpen: signUpModal, setOpen: setSignUpModal },
       }}
     >
       <SecondaryInfoContext.Provider

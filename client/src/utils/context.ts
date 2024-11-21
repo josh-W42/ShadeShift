@@ -16,6 +16,11 @@ export const Context = createContext({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setConfig: (_c: GenConfig) => {},
   },
+  signUpModal: {
+    isOpen: false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setOpen: (_v: boolean) => {},
+  },
 });
 
 export const SecondaryInfoContext = createContext({

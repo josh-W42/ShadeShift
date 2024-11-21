@@ -1,10 +1,36 @@
 import { useContext } from 'react';
 import { TopNavBarComponent } from './component';
-import { Context, getGenURL } from '../../utils';
+import { BASE_SERVER_URL, Context, getGenURL } from '../../utils';
 
 export const TopNavBar = () => {
-  const { genConfig } = useContext(Context);
+  const { genConfig, signUpModal } = useContext(Context);
   const genUrl = getGenURL(genConfig.value);
 
-  return <TopNavBarComponent genUrl={genUrl} />;
+  const handleDb = async () => {
+    try {
+      const response = await fetch(BASE_SERVER_URL + '/users');
+
+      const { data } = await response.json();
+
+      console.log(data);
+
+      if (!response.ok) {
+        const data = await response.json();
+
+        throw new Error(
+          `Status:${response.status}\nData:${Object.entries(data).toString()}`
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <TopNavBarComponent
+      genUrl={genUrl}
+      handleDb={handleDb}
+      openSignUp={() => signUpModal.setOpen(true)}
+    />
+  );
 };

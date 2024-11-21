@@ -3,12 +3,19 @@ import { Link } from 'react-router-dom';
 import { FC } from 'react';
 import { History } from '../../classes';
 import { ViewPaletteModal } from '../ViewPaletteModal';
+import { SignUpModal } from '../SignUpModal';
 
 interface Props {
   genUrl: string;
+  handleDb: () => Promise<void>;
+  openSignUp: () => void;
 }
 
-export const TopNavBarComponent: FC<Props> = ({ genUrl }) => {
+export const TopNavBarComponent: FC<Props> = ({
+  genUrl,
+  handleDb,
+  openSignUp,
+}) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -17,6 +24,17 @@ export const TopNavBarComponent: FC<Props> = ({ genUrl }) => {
             Shade Shift
           </Typography>
           <ViewPaletteModal />
+          <SignUpModal />
+          <button
+            onClick={() => {
+              handleDb();
+            }}
+          >
+            Database
+          </button>
+          <Button onClick={() => openSignUp()} variant="contained">
+            SignUp
+          </Button>
           <Link to={genUrl} tabIndex={-1}>
             <Button
               onClick={() => {

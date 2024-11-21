@@ -16,7 +16,7 @@ export const PalettePageComponent: FunctionComponent<Props> = ({ colors }) => {
   return (
     <div>
       <PaletteToolBar />
-      <div id="colorContainer">{getColors()}</div>;
+      <div id="colorContainer">{getColors()}</div>
     </div>
   );
 };
