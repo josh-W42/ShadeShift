@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
+from flask_login import LoginManager
 
 
 class Base(DeclarativeBase):
@@ -21,12 +22,19 @@ db = SQLAlchemy(model_class=Base)
 migrate = Migrate(app, db)
 f_bcrypt = Bcrypt(app)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
 
-CORS(app, resources={
-    r'/api/*': {
-        "origins": ["http://localhost:5173"]
-    }
-})
+
+CORS(
+    app,
+    resources={
+        r'/api/*': {
+            "origins": ["http://localhost:5173"]
+        }
+    },
+    supports_credentials=True,
+)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(base_dir, 'database.db')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
