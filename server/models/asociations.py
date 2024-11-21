@@ -1,5 +1,6 @@
 from sqlalchemy import Table, Column, ForeignKey
-from .base import Base
+
+from config import Base
 
 
 user_palette_association_table = Table(

@@ -1,37 +1,16 @@
 import os
 import time
 
-from flask import Flask, request, jsonify
-from utils import extract_colors, is_file_allowed, remove_image
-from flask_cors import CORS
+from flask import request, jsonify, session
 from werkzeug.utils import secure_filename
-from models import db, User, Palette
-from flask_migrate import Migrate
-from flask_bcrypt import Bcrypt
 
-
-base_dir = os.path.abspath(os.path.dirname(__file__))
-UPLOAD_FOLDER = os.path.join(base_dir, './temp')
-app = Flask(__name__)
-app.secret_key = os.environ.get('API_SECRET')
-migrate = Migrate(app, db)
-bcrypt = Bcrypt(app)
-
-
-CORS(app, resources={
-    r'/api/*': {
-        "origins": ["http://localhost:5173"]
-    }
-})
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(base_dir, 'database.db')
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-db.init_app(app)
+from utils import extract_colors, is_file_allowed, remove_image
+from models import User
+from config import app, db
 
 with app.app_context():
     db.create_all()
+
 
 @app.route('/')
 def hello_world():
@@ -72,17 +51,33 @@ def upload_image():
 @app.route('/api/users')
 def get_users():
     try:
-        users = User.query.all()
-        return jsonify({'data': users}), 200
+        users = [{ 'id': user.id, 'username': user.username } for user in User.query.all()]
+        return jsonify({'data': users }), 200
     except Exception as e:
         print(e)
         return jsonify({'error': 'Failed to get users', 'message': str(e)}), 500
 
-# @app.route('/api/users/create', methods=["POST"])
-# def user_create():
-#     user = User(
-#         username=request.form['username']
-#     )
+
+@app.route('/api/users/create', methods=["POST"])
+def user_create():
+
+    try:
+        data = request.get_json()
+
+        user = User(
+            username=data['username']
+        )
+
+        user.password_hash = data['password']
+        db.session.add(user)
+        db.session.commit()
+
+        session['user_id'] = user.id
+
+        return jsonify({'data': {'user': {'id': user.id, 'username': user.username}}}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Failed to sign up user', 'message': str(e)}), 500
 
 
 if __name__ == '__main__':

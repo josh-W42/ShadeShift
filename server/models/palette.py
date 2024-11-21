@@ -1,7 +1,7 @@
-from typing import List
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from .db import db
+
+from config import db
 from .asociations import user_palette_association_table
 
 
