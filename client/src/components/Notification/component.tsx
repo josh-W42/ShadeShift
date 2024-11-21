@@ -29,7 +29,7 @@ export const NotificationsComponent: FC<Props> = ({
     <div>
       <Snackbar
         open={open}
-        autoHideDuration={1500}
+        autoHideDuration={2000}
         onClose={handleClose}
         action={
           <>

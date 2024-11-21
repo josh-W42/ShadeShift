@@ -1,20 +1,16 @@
 import { FC, useContext, useState } from 'react';
-import { BASE_SERVER_URL, Context } from '../../utils';
+import { BASE_SERVER_URL, Context, NotificationContext } from '../../utils';
 import { SignUpModalComponent } from './component';
 
 export const SignUpModal: FC = () => {
   const { signUpModal } = useContext(Context);
+  const { notifications, setNotifications } = useContext(NotificationContext);
   const [showPassword, setShowPassword] = useState(false);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async () => {
-    const formData = new FormData();
-
     if (!userName || !password) return;
-
-    formData.append('username', userName);
-    formData.append('password', password);
 
     try {
       const response = await fetch(BASE_SERVER_URL + '/users', {
@@ -39,6 +35,14 @@ export const SignUpModal: FC = () => {
       console.log(data);
     } catch (error) {
       console.error(error);
+      setNotifications([
+        ...notifications,
+        {
+          message: 'Login Failed. Please Try Again.',
+          severity: 'error',
+          key: new Date().getTime(),
+        },
+      ]);
     }
   };
 
