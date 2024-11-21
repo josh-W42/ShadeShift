@@ -9,7 +9,7 @@ class Palette(db.Model):
     __tablename__ = 'palette'
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    colors: Mapped[str] = mapped_column(String(75))
+    colors: Mapped[str] = mapped_column(String(75), unique=True)
     users = relationship(
         "User",
         secondary=user_palette_association_table,

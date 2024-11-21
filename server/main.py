@@ -51,14 +51,14 @@ def upload_image():
 @app.route('/api/users')
 def get_users():
     try:
-        users = [{ 'id': user.id, 'username': user.username } for user in User.query.all()]
+        users = [{ 'id': user.id, 'username': user.username, 'palettes': user.palettes} for user in User.query.all()]
         return jsonify({'data': users }), 200
     except Exception as e:
         print(e)
         return jsonify({'error': 'Failed to get users', 'message': str(e)}), 500
 
 
-@app.route('/api/users/create', methods=["POST"])
+@app.route('/api/users', methods=["POST"])
 def user_create():
 
     try:
@@ -74,11 +74,12 @@ def user_create():
 
         session['user_id'] = user.id
 
-        return jsonify({'data': {'user': {'id': user.id, 'username': user.username}}}), 200
+        return jsonify({'data': {'user': {'id': user.id, 'username': user.username}}}), 201
     except Exception as e:
         print(e)
         return jsonify({'error': 'Failed to sign up user', 'message': str(e)}), 500
 
+@app.route('/api/users/save-')
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=8000, debug=True)
