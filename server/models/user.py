@@ -1,17 +1,19 @@
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.hybrid import hybrid_property
+from flask_login import UserMixin
 
 from .asociations import user_palette_association_table
 from config import db, f_bcrypt
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "user"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     _password_hash: Mapped[str] = mapped_column((String(50)))
+
     palettes = relationship(
         "Palette",
         secondary=user_palette_association_table,
