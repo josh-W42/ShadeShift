@@ -17,7 +17,7 @@ export const SignUpModal: FC = () => {
     formData.append('password', password);
 
     try {
-      const response = await fetch(BASE_SERVER_URL + '/users/create', {
+      const response = await fetch(BASE_SERVER_URL + '/users', {
         method: 'POST',
         body: JSON.stringify({ username: userName, password: password }),
         headers: {
