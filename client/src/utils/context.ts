@@ -4,6 +4,7 @@ import { DEFAULT_CONFIG, GenConfig } from './genConfig';
 import { ColorFormats } from './colors';
 import { NotificationMessage } from './notifications';
 import Color from 'color';
+import { User } from './user';
 
 export const Context = createContext({
   theme: {
@@ -20,6 +21,16 @@ export const Context = createContext({
     isOpen: false,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setOpen: (_v: boolean) => {},
+  },
+  loginModal: {
+    isOpen: false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setOpen: (_o: boolean) => {},
+  },
+  user: {
+    value: undefined as undefined | User,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setValue: (_v: User) => {},
   },
 });
 

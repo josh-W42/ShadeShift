@@ -8,6 +8,7 @@ import {
   NotificationContext,
   NotificationMessage,
   PaletteContext,
+  User,
 } from '../../utils';
 import { RootComponent } from './component';
 import Color from 'color';
@@ -20,6 +21,8 @@ export const Root: FunctionComponent = () => {
   const [currentPalette, setCurrentPalette] = useState<Color[]>([]);
   const [viewModal, setViewModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [user, setUser] = useState<User | undefined>(undefined);
 
   return (
     <Context.Provider
@@ -27,6 +30,11 @@ export const Root: FunctionComponent = () => {
         theme: { value: theme, setTheme },
         genConfig: { value: genConfig, setConfig: setGenConfig },
         signUpModal: { isOpen: signUpModal, setOpen: setSignUpModal },
+        loginModal: { isOpen: loginModal, setOpen: setLoginModal },
+        user: {
+          value: user,
+          setValue: setUser,
+        },
       }}
     >
       <SecondaryInfoContext.Provider
