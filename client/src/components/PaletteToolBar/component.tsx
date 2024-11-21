@@ -1,26 +1,32 @@
 import { FunctionComponent } from 'react';
-import { Theme } from '../../utils';
+import { Theme, User } from '../../utils';
 import { Link } from 'react-router-dom';
 import { PaletteGenModal } from '../PaletteGenModal';
 import { Button, ButtonGroup, IconButton, Tooltip } from '@mui/material';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import { History } from '../../classes';
 
 interface Props {
   theme: Theme;
   genUrl: string;
+  user?: User;
   handleUndo: (current: string) => void;
   handleRedo: (current: string) => void;
+  handleSave: (current: string) => Promise<void>;
   openViewModal: () => void;
 }
 
 export const PaletteToolBarComponent: FunctionComponent<Props> = ({
   theme,
   genUrl,
+  user,
   handleUndo,
   handleRedo,
+  handleSave,
   openViewModal,
 }) => {
   return (
@@ -68,6 +74,17 @@ export const PaletteToolBarComponent: FunctionComponent<Props> = ({
             <VisibilityIcon />
           </IconButton>
         </Tooltip>
+        <IconButton
+          onClick={() => {
+            handleSave(window.location.pathname);
+          }}
+        >
+          {user?.savedPalettes.has(window.location.pathname.slice(1)) ? (
+            <BookmarkOutlinedIcon />
+          ) : (
+            <BookmarkBorderOutlinedIcon />
+          )}
+        </IconButton>
       </ButtonGroup>
     </div>
   );
