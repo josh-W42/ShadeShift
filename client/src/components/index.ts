@@ -11,3 +11,4 @@ export * from './ViewPaletteModal';
 export * from './GeneralPaletteMenu';
 export * from './ViewPaletteModal';
 export * from './SignUpModal';
+export * from './LogInModal';
