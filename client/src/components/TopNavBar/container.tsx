@@ -3,7 +3,7 @@ import { TopNavBarComponent } from './component';
 import { BASE_SERVER_URL, Context, getGenURL } from '../../utils';
 
 export const TopNavBar = () => {
-  const { genConfig, signUpModal } = useContext(Context);
+  const { genConfig, signUpModal, loginModal, user } = useContext(Context);
   const genUrl = getGenURL(genConfig.value);
 
   const handleDb = async () => {
@@ -29,8 +29,10 @@ export const TopNavBar = () => {
   return (
     <TopNavBarComponent
       genUrl={genUrl}
+      user={user.value}
       handleDb={handleDb}
       openSignUp={() => signUpModal.setOpen(true)}
+      openLogin={() => loginModal.setOpen(true)}
     />
   );
 };

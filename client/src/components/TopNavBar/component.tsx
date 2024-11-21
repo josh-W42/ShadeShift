@@ -4,17 +4,23 @@ import { FC } from 'react';
 import { History } from '../../classes';
 import { ViewPaletteModal } from '../ViewPaletteModal';
 import { SignUpModal } from '../SignUpModal';
+import { LoginModal } from '../LogInModal';
+import { User } from '../../utils';
 
 interface Props {
   genUrl: string;
+  user?: User;
   handleDb: () => Promise<void>;
   openSignUp: () => void;
+  openLogin: () => void;
 }
 
 export const TopNavBarComponent: FC<Props> = ({
   genUrl,
+  user,
   handleDb,
   openSignUp,
+  openLogin,
 }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -25,6 +31,7 @@ export const TopNavBarComponent: FC<Props> = ({
           </Typography>
           <ViewPaletteModal />
           <SignUpModal />
+          <LoginModal />
           <button
             onClick={() => {
               handleDb();
@@ -32,9 +39,18 @@ export const TopNavBarComponent: FC<Props> = ({
           >
             Database
           </button>
-          <Button onClick={() => openSignUp()} variant="contained">
-            SignUp
-          </Button>
+          {user ? (
+            <></>
+          ) : (
+            <>
+              <Button onClick={() => openSignUp()} variant="contained">
+                SignUp
+              </Button>
+              <Button onClick={() => openLogin()} variant="contained">
+                Login
+              </Button>
+            </>
+          )}
           <Link to={genUrl} tabIndex={-1}>
             <Button
               onClick={() => {
