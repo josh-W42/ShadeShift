@@ -5,9 +5,8 @@ import {
   Menu,
   MenuItem,
 } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { FC, MouseEvent } from 'react';
+import { FC, MouseEvent, ReactElement } from 'react';
 import IosShareIcon from '@mui/icons-material/IosShare';
 
 interface Props {
@@ -15,6 +14,7 @@ interface Props {
   onClose: () => void;
   open: boolean;
   anchorEl: null | HTMLElement;
+  IconEl: ReactElement;
   handleNavigate: () => void;
   openViewModal: () => void;
 }
@@ -26,6 +26,7 @@ export const GeneralPaletteMenuComponent: FC<Props> = ({
   openViewModal,
   open,
   anchorEl,
+  IconEl,
 }) => {
   return (
     <div>
@@ -36,7 +37,7 @@ export const GeneralPaletteMenuComponent: FC<Props> = ({
         aria-expanded={open ? 'true' : undefined}
         onClick={onClick}
       >
-        <SettingsIcon />
+        {IconEl}
       </IconButton>
       <Menu
         id="general-palette-menu"

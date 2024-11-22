@@ -12,6 +12,7 @@ import { ChangeEvent, FC } from 'react';
 import { ColorBlock } from '../ColorBlock';
 import { CloudUpload } from '@mui/icons-material';
 import { GeneralPaletteMenu } from '../GeneralPaletteMenu';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface Props {
   handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -91,7 +92,7 @@ export const ImagePaletteProducerComponent: FC<Props> = ({
             >
               Create
             </Button>
-            <GeneralPaletteMenu palette={colors} />
+            <GeneralPaletteMenu palette={colors} IconEl={<SettingsIcon />} />
           </CardActions>
         </form>
       </Card>
