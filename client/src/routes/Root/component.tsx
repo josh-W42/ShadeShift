@@ -1,12 +1,13 @@
 import { FunctionComponent } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Notifications, TopNavBar } from '../../components';
+import { Notifications, TopNavBar, UserDrawer } from '../../components';
 
 export const RootComponent: FunctionComponent = () => {
   return (
     <div>
-      <TopNavBar />
-      <Outlet />
+      <UserDrawer>
+        <Outlet />
+      </UserDrawer>
       <Notifications />
     </div>
   );
