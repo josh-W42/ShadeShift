@@ -6,9 +6,14 @@ import {
   getGenURL,
   NotificationContext,
   PaletteContext,
+  PaletteData,
 } from '../../utils';
 import { History } from '../../classes';
 import { useNavigate } from 'react-router-dom';
+
+interface SavePaletteResponse {
+  data: PaletteData;
+}
 
 export const PaletteToolBar: FunctionComponent = () => {
   const { theme, genConfig, user } = useContext(Context);
@@ -16,8 +21,6 @@ export const PaletteToolBar: FunctionComponent = () => {
   const { notifications, setNotifications } = useContext(NotificationContext);
   const navigate = useNavigate();
   const genUrl = getGenURL(genConfig.value);
-
-  console.log(user.value?.savedPalettes, window.location.pathname);
 
   const handleUndo = (current: string) => {
     const last = History.goBack(current);
@@ -62,11 +65,17 @@ export const PaletteToolBar: FunctionComponent = () => {
         );
       }
 
-      const resJSON = await response.json();
+      const resJSON: SavePaletteResponse = await response.json();
 
       const { data } = resJSON;
 
-      console.log(data);
+      if (user.value == undefined) {
+        throw new Error('User must log in.');
+      }
+
+      const newSet = new Set([...user.value.savedPalettes]);
+      newSet.add(data.colors);
+      user.setValue({ ...user.value, savedPalettes: newSet });
     } catch (error) {
       console.error(error);
       setNotifications([
