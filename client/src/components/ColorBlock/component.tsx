@@ -10,6 +10,7 @@ interface Props {
   shades: Color[];
   handleCopy: () => void;
   minimal?: boolean;
+  disableFocus?: boolean;
   onClick?: () => void;
   handleShadeClick: (color: Color) => void;
   handleRemove: () => void;
@@ -22,6 +23,7 @@ export const ColorBlockComponent: FC<Props> = ({
   shades,
   handleCopy,
   minimal,
+  disableFocus,
   handleShadeClick,
   handleRemove,
   onClick,
@@ -31,6 +33,8 @@ export const ColorBlockComponent: FC<Props> = ({
       <Button
         disableElevation
         disableTouchRipple
+        disableFocusRipple={disableFocus}
+        tabIndex={disableFocus ? -1 : undefined}
         className={`colorBlock ${
           color.isDark() ? 'darkBlock' : 'lightBlock'
         } minimal`}

@@ -15,6 +15,7 @@ interface Props {
   noCopy?: boolean;
   onClick?: () => void;
   index?: number;
+  disableFocus?: boolean;
 }
 
 export const ColorBlock: FC<Props> = ({
@@ -23,6 +24,7 @@ export const ColorBlock: FC<Props> = ({
   noCopy,
   onClick,
   index,
+  disableFocus,
 }) => {
   const [showShades, setShowShades] = useState(false);
   const { notifications, setNotifications } = useContext(NotificationContext);
@@ -87,6 +89,7 @@ export const ColorBlock: FC<Props> = ({
       onClick={onClick}
       handleShadeClick={handleShadeClick}
       handleRemove={handleRemove}
+      disableFocus={disableFocus}
     />
   );
 };

@@ -109,3 +109,32 @@ button {
   color: inherit;
   transition: 0.5s;
 }
+
+#paletteLibList {
+  width: 100%;
+  max-width: 100%;
+}
+
+#paletteLibList .paletteLibListItem {
+  width: 100%;
+  display: flex;
+  padding: 1;
+  border-radius: 2%;
+  overflow: hidden;
+  flex-direction: row;
+  padding: '15px 5px';
+}
+
+#paletteLibList .colorBlock {
+  width: 100%;
+  min-width: 0;
+  height: 75px;
+  border-radius: 2%;
+  overflow: hidden;
+  transition: 0.5s;
+  cursor: auto;
+}
+
+#paletteLibList .blockHexCode {
+  display: none;
+}
