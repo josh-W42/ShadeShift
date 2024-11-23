@@ -23,6 +23,7 @@ export const Root: FunctionComponent = () => {
   const [signUpModal, setSignUpModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [userDrawerOpen, setUserDrawerOpen] = useState(false);
 
   return (
     <Context.Provider
@@ -35,6 +36,7 @@ export const Root: FunctionComponent = () => {
           value: user,
           setValue: setUser,
         },
+        userDrawerOpen: { isOpen: userDrawerOpen, setOpen: setUserDrawerOpen },
       }}
     >
       <SecondaryInfoContext.Provider

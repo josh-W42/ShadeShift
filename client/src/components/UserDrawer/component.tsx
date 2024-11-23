@@ -6,19 +6,24 @@ import Divider from '@mui/material/Divider';
 import { FC, ReactElement } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { TopNavBar } from '../TopNavBar';
-import { ListItem, Typography } from '@mui/material';
+import { ListItem, Paper, Typography } from '@mui/material';
 import Color from 'color';
 import { ColorBlock } from '../ColorBlock';
 import { GeneralPaletteMenu } from '../GeneralPaletteMenu';
 
-const drawerWidth = 240;
-
 interface Props {
   children: ReactElement | undefined;
+  open: boolean;
   savedPalettes: Color[][];
 }
 
-export const UserDrawerComponent: FC<Props> = ({ children, savedPalettes }) => {
+export const UserDrawerComponent: FC<Props> = ({
+  children,
+  open,
+  savedPalettes,
+}) => {
+  const drawerWidth = open ? 240 : 0;
+
   const palettes = savedPalettes.map((colorArr) => {
     const palette = colorArr.map((color) => {
       return <ColorBlock disableFocus minimal color={color} noCopy />;
@@ -30,7 +35,17 @@ export const UserDrawerComponent: FC<Props> = ({ children, savedPalettes }) => {
 
     return (
       <ListItem className="paletteLibListItem">
-        {palette}
+        <Paper
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: '100%',
+            padding: 0,
+          }}
+          elevation={3}
+        >
+          {palette}
+        </Paper>
         <GeneralPaletteMenu palette={colorArr} IconEl={<MoreVertIcon />} />
       </ListItem>
     );
@@ -41,10 +56,12 @@ export const UserDrawerComponent: FC<Props> = ({ children, savedPalettes }) => {
       <Drawer
         variant="permanent"
         sx={{
+          transition: '0.5s',
           width: drawerWidth,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
+            transition: '0.5s',
             boxSizing: 'border-box',
           },
         }}

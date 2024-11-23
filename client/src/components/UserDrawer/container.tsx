@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const UserDrawer: FC<Props> = ({ children }) => {
-  const { user } = useContext(Context);
+  const { user, userDrawerOpen } = useContext(Context);
 
   const getSavedPalettes: () => Color[][] = () => {
     if (user.value && user.value.savedPalettes) {
@@ -24,7 +24,10 @@ export const UserDrawer: FC<Props> = ({ children }) => {
   };
 
   return (
-    <UserDrawerComponent savedPalettes={getSavedPalettes()}>
+    <UserDrawerComponent
+      open={userDrawerOpen.isOpen}
+      savedPalettes={getSavedPalettes()}
+    >
       {children}
     </UserDrawerComponent>
   );

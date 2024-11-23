@@ -32,6 +32,11 @@ export const Context = createContext({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setValue: (_v: User) => {},
   },
+  userDrawerOpen: {
+    isOpen: false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setOpen: (_n: boolean) => {},
+  },
 });
 
 export const SecondaryInfoContext = createContext({

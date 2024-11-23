@@ -1,4 +1,11 @@
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  Button,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
 import { History } from '../../classes';
@@ -6,11 +13,13 @@ import { ViewPaletteModal } from '../ViewPaletteModal';
 import { SignUpModal } from '../SignUpModal';
 import { LoginModal } from '../LogInModal';
 import { User } from '../../utils';
+import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 
 interface Props {
   genUrl: string;
   user?: User;
-  handleDb: () => Promise<void>;
+  userDrawer: [boolean, () => void];
   openSignUp: () => void;
   openLogin: () => void;
 }
@@ -18,27 +27,51 @@ interface Props {
 export const TopNavBarComponent: FC<Props> = ({
   genUrl,
   user,
-  handleDb,
+  userDrawer,
   openSignUp,
   openLogin,
 }) => {
+  const [isDrawerOpen, toggleDrawer] = userDrawer;
+  const drawerIcon = () => {
+    if (isDrawerOpen) {
+      return (
+        <Tooltip title="Close Palette Library">
+          <Button
+            sx={{ textTransform: 'capitalize' }}
+            variant="contained"
+            onClick={() => toggleDrawer()}
+            startIcon={<BookmarksIcon />}
+          >
+            Palette Library
+          </Button>
+        </Tooltip>
+      );
+    }
+
+    return (
+      <Tooltip title="Open Palette Library">
+        <Button
+          sx={{ textTransform: 'capitalize' }}
+          variant="contained"
+          onClick={() => toggleDrawer()}
+          startIcon={<BookmarksOutlinedIcon />}
+        >
+          Palette Library
+        </Button>
+      </Tooltip>
+    );
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="static" sx={{ padding: 1 }}>
+        <Toolbar style={{ minHeight: 0 }}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Shade Shift
           </Typography>
           <ViewPaletteModal />
           <SignUpModal />
           <LoginModal />
-          <button
-            onClick={() => {
-              handleDb();
-            }}
-          >
-            Database
-          </button>
           {user ? (
             <></>
           ) : (
@@ -59,7 +92,7 @@ export const TopNavBarComponent: FC<Props> = ({
                 }
               }}
               variant="contained"
-              sx={{ textTransform: 'capitalize', margin: '0 25px' }}
+              sx={{ textTransform: 'capitalize' }}
             >
               Palette Creator
             </Button>
@@ -70,11 +103,12 @@ export const TopNavBarComponent: FC<Props> = ({
                 History.empty();
               }}
               variant="contained"
-              sx={{ textTransform: 'capitalize' }}
+              sx={{ textTransform: 'capitalize', margin: '0 25px' }}
             >
               Image Extract
             </Button>
           </Link>
+          {drawerIcon()}
         </Toolbar>
       </AppBar>
     </Box>
