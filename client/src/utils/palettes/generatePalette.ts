@@ -3,6 +3,7 @@ import { ColorHarmonyType, GenerationType } from './types';
 import { createScientificPalette } from './createScientificPalette';
 import { getRandomColor } from './getRandomColor';
 import { createMonochromaticPalette } from './createMonochromaticPalette';
+import { createGradientPalette } from './createGradientPalette';
 
 export interface GeneratePaletteOptions {
   baseColor?: Color;
@@ -85,6 +86,13 @@ export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
       return createScientificPalette(opt.baseColor).get(
         ColorHarmonyType.splitComplementary
       )!;
+
+    case GenerationType.gradient:
+      return createGradientPalette(
+        opt.numColors,
+        getRandomColor(),
+        getRandomColor()
+      );
 
     // // Case Deemed not Ready
     // case GenerationType.discoveryRandom:

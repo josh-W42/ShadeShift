@@ -10,6 +10,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Slider,
   Tooltip,
 } from '@mui/material';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
@@ -23,6 +24,7 @@ interface Props {
   modalOpen: [boolean, () => void];
   genConfig: [GenConfig, (config: GenConfig) => void];
   genColor: [string | undefined, (hex: string) => void];
+  numColors: [number, (val: number) => void];
 }
 
 const getGenTypes = [...Object.values(GenerationType)].map((type) => (
@@ -33,10 +35,12 @@ export const PaletteGenModalComponent: FC<Props> = ({
   modalOpen,
   genConfig,
   genColor,
+  numColors,
 }) => {
   const [open, toggleOpen] = modalOpen;
   const [config, setGenConfig] = genConfig;
   const [color, setColor] = genColor;
+  const [numOfColors, setNumOfColors] = numColors;
 
   return (
     <>
@@ -109,6 +113,25 @@ export const PaletteGenModalComponent: FC<Props> = ({
                     color: value.slice(1),
                   });
                 }}
+              />
+            </FormControl>
+            <FormControl sx={{ marginTop: 5 }}>
+              <FormLabel id="palette-type-label">Number of Colors</FormLabel>
+              <Slider
+                valueLabelDisplay="auto"
+                aria-label="Number of Colors to Generate"
+                min={1}
+                max={10}
+                marks
+                onChange={(_, value) => {
+                  const val = typeof value === 'number' ? value : value[0];
+                  setNumOfColors(val);
+                  setGenConfig({
+                    ...config,
+                    num_colors: val,
+                  });
+                }}
+                value={numOfColors}
               />
             </FormControl>
           </FormControl>
