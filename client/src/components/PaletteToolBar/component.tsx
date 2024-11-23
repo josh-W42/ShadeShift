@@ -74,17 +74,23 @@ export const PaletteToolBarComponent: FunctionComponent<Props> = ({
             <VisibilityIcon />
           </IconButton>
         </Tooltip>
-        <IconButton
-          onClick={() => {
-            handleSave(window.location.pathname);
-          }}
-        >
-          {user?.savedPalettes.has(window.location.pathname.slice(1)) ? (
-            <BookmarkOutlinedIcon />
-          ) : (
-            <BookmarkBorderOutlinedIcon />
-          )}
-        </IconButton>
+        {user?.savedPalettes.has(window.location.pathname.slice(1)) ? (
+          <Tooltip title="Un-save Palette">
+            <IconButton>
+              <BookmarkOutlinedIcon />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Save Palette">
+            <IconButton
+              onClick={() => {
+                handleSave(window.location.pathname);
+              }}
+            >
+              <BookmarkBorderOutlinedIcon />
+            </IconButton>
+          </Tooltip>
+        )}
       </ButtonGroup>
     </div>
   );
