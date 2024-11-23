@@ -8,3 +8,4 @@ export * from './parseGenerateQuery';
 export * from './getSequence';
 export * from './sequenceToPalette';
 export * from './createDiscoveryPalette';
+export * from './createGradientPalette';
