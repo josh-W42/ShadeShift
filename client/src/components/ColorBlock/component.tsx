@@ -1,7 +1,10 @@
 import Color from 'color';
 import { FC } from 'react';
 import { SecondarySettingModal } from '../SecondarySettingModal';
-import { Box, Button } from '@mui/material';
+import { Box, Button, IconButton, Tooltip } from '@mui/material';
+import TonalityIcon from '@mui/icons-material/Tonality';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 
 interface Props {
   color: Color;
@@ -94,6 +97,7 @@ export const ColorBlockComponent: FC<Props> = ({
             textTransform: 'capitalize',
           }}
           onClick={() => toggleShowShades()}
+          startIcon={<TonalityIcon />}
         >
           Shades
         </Button>
@@ -110,11 +114,30 @@ export const ColorBlockComponent: FC<Props> = ({
       }}
       key={color.hex()}
     >
-      <button onClick={() => toggleShowShades()}>Shades</button>
-      <button onClick={() => handleRemove()}>Remove</button>
-      <button onClick={() => handleCopy()}>Copy</button>
-      <button className="blockHexCode">{color.hex().slice(1)}</button>
+      <Tooltip title="Shades">
+        <IconButton sx={{ borderRadius: 0 }} onClick={() => toggleShowShades()}>
+          <TonalityIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Copy">
+        <IconButton sx={{ borderRadius: 0 }} onClick={() => handleCopy()}>
+          <ContentCopyOutlinedIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Remove">
+        <IconButton sx={{ borderRadius: 0 }} onClick={() => handleRemove()}>
+          <CancelOutlinedIcon />
+        </IconButton>
+      </Tooltip>
+      <Box sx={{ flexGrow: 1 }}></Box>
+      <Button
+        sx={{ fontWeight: 'bolder', fontSize: '2em' }}
+        className="blockHexCode"
+      >
+        {color.hex().slice(1)}
+      </Button>
       <SecondarySettingModal classes={'blockSecondaryInfo'} color={color} />
+      <Box sx={{ marginBottom: 10 }}></Box>
     </Box>
   );
 };

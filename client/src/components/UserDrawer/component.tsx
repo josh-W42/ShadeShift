@@ -46,7 +46,11 @@ export const UserDrawerComponent: FC<Props> = ({
         >
           {palette}
         </Paper>
-        <GeneralPaletteMenu palette={colorArr} IconEl={<MoreVertIcon />} />
+        <GeneralPaletteMenu
+          palette={colorArr}
+          IconEl={<MoreVertIcon />}
+          tabIndex={open ? undefined : -1}
+        />
       </ListItem>
     );
   });

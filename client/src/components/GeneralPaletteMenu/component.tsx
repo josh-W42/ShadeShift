@@ -17,6 +17,7 @@ interface Props {
   IconEl: ReactElement;
   handleNavigate: () => void;
   openViewModal: () => void;
+  tabIndex?: number;
 }
 
 export const GeneralPaletteMenuComponent: FC<Props> = ({
@@ -27,6 +28,7 @@ export const GeneralPaletteMenuComponent: FC<Props> = ({
   open,
   anchorEl,
   IconEl,
+  tabIndex,
 }) => {
   return (
     <div>
@@ -36,6 +38,7 @@ export const GeneralPaletteMenuComponent: FC<Props> = ({
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={onClick}
+        tabIndex={tabIndex}
       >
         {IconEl}
       </IconButton>

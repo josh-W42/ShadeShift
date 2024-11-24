@@ -79,7 +79,11 @@ export const TopNavBarComponent: FC<Props> = ({
               <Button onClick={() => openSignUp()} variant="contained">
                 SignUp
               </Button>
-              <Button onClick={() => openLogin()} variant="contained">
+              <Button
+                sx={{ margin: '0 25px' }}
+                onClick={() => openLogin()}
+                variant="contained"
+              >
                 Login
               </Button>
             </>

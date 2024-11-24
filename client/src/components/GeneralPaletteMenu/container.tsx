@@ -7,9 +7,14 @@ import { getSequence, PaletteContext } from '../../utils';
 interface Props {
   palette: Color[];
   IconEl: ReactElement;
+  tabIndex?: number;
 }
 
-export const GeneralPaletteMenu: FC<Props> = ({ palette, IconEl }) => {
+export const GeneralPaletteMenu: FC<Props> = ({
+  palette,
+  IconEl,
+  tabIndex,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { viewModal, palette: globalPalette } = useContext(PaletteContext);
 
@@ -42,6 +47,7 @@ export const GeneralPaletteMenu: FC<Props> = ({ palette, IconEl }) => {
       anchorEl={anchorEl}
       open={open}
       IconEl={IconEl}
+      tabIndex={tabIndex}
     />
   );
 };
