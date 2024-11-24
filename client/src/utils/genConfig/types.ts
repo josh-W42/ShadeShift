@@ -14,4 +14,5 @@ export enum GenConfigParams {
 
 export const DEFAULT_CONFIG: GenConfig = {
   type: GenerationType.random,
+  num_colors: 5,
 };
