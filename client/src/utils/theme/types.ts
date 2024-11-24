@@ -1,17 +1,15 @@
-import Color from 'color';
+import { createTheme, ThemeOptions } from '@mui/material/styles';
 
-export interface Theme {
-  primary: string;
-  secondary: string;
-  tertiary: string;
-  lighter: string;
-  darker: string;
-}
-
-export const DEFAULT_THEME: Theme = {
-  primary: '#1BBA8A',
-  secondary: '#7EA1FF',
-  tertiary: '#F18865',
-  lighter: Color('#1BBA8A').l(98).chroma(10).hex(),
-  darker: Color('#1BBA8A').l(10).chroma(20).hex(),
+export const DEFAULT_THEME_OPTIONS: ThemeOptions = {
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#1F117B',
+    },
+    secondary: {
+      main: '#5B1C67',
+    },
+  },
 };
+
+export const DEFAULT_THEME = createTheme(DEFAULT_THEME_OPTIONS);

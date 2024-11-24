@@ -16,7 +16,7 @@ interface SavePaletteResponse {
 }
 
 export const PaletteToolBar: FunctionComponent = () => {
-  const { theme, genConfig, user } = useContext(Context);
+  const { genConfig, user } = useContext(Context);
   const { viewModal } = useContext(PaletteContext);
   const { notifications, setNotifications } = useContext(NotificationContext);
   const navigate = useNavigate();
@@ -91,7 +91,6 @@ export const PaletteToolBar: FunctionComponent = () => {
 
   return (
     <PaletteToolBarComponent
-      theme={theme.value}
       genUrl={genUrl}
       user={user.value}
       handleUndo={handleUndo}

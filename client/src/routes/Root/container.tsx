@@ -1,6 +1,5 @@
 import { FunctionComponent, useState } from 'react';
 import {
-  DEFAULT_THEME,
   Context,
   DEFAULT_CONFIG,
   ColorFormats,
@@ -9,12 +8,15 @@ import {
   NotificationMessage,
   PaletteContext,
   User,
+  DEFAULT_THEME_OPTIONS,
 } from '../../utils';
 import { RootComponent } from './component';
 import Color from 'color';
+import { createTheme } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
 
 export const Root: FunctionComponent = () => {
-  const [theme, setTheme] = useState(DEFAULT_THEME);
+  const [themeOptions, setThemeOptions] = useState(DEFAULT_THEME_OPTIONS);
   const [genConfig, setGenConfig] = useState(DEFAULT_CONFIG);
   const [format, setFormat] = useState(ColorFormats.rgb);
   const [pack, setPack] = useState<NotificationMessage[]>([]);
@@ -25,10 +27,12 @@ export const Root: FunctionComponent = () => {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [userDrawerOpen, setUserDrawerOpen] = useState(false);
 
+  const theme = createTheme(themeOptions);
+
   return (
     <Context.Provider
       value={{
-        theme: { value: theme, setTheme },
+        theme: { value: theme, setTheme: setThemeOptions },
         genConfig: { value: genConfig, setConfig: setGenConfig },
         signUpModal: { isOpen: signUpModal, setOpen: setSignUpModal },
         loginModal: { isOpen: loginModal, setOpen: setLoginModal },
@@ -63,7 +67,9 @@ export const Root: FunctionComponent = () => {
               },
             }}
           >
-            <RootComponent />
+            <ThemeProvider theme={theme}>
+              <RootComponent />
+            </ThemeProvider>
           </PaletteContext.Provider>
         </NotificationContext.Provider>
       </SecondaryInfoContext.Provider>

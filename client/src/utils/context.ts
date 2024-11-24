@@ -1,16 +1,17 @@
 import { createContext } from 'react';
-import { DEFAULT_THEME, Theme } from './theme';
 import { DEFAULT_CONFIG, GenConfig } from './genConfig';
 import { ColorFormats } from './colors';
 import { NotificationMessage } from './notifications';
 import Color from 'color';
 import { User } from './user';
+import { ThemeOptions } from '@mui/material';
+import { DEFAULT_THEME } from './theme';
 
 export const Context = createContext({
   theme: {
     value: DEFAULT_THEME,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setTheme: (_t: Theme) => {},
+    setTheme: (_t: ThemeOptions) => {},
   },
   genConfig: {
     value: DEFAULT_CONFIG,

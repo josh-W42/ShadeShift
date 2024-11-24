@@ -64,7 +64,7 @@ export const TopNavBarComponent: FC<Props> = ({
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ padding: 1 }}>
+      <AppBar position="static" sx={{ padding: 1, background: '#00068F' }}>
         <Toolbar style={{ minHeight: 0 }}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Shade Shift
