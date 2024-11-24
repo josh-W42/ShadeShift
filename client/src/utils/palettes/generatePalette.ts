@@ -4,6 +4,7 @@ import { createScientificPalette } from './createScientificPalette';
 import { getRandomColor } from './getRandomColor';
 import { createMonochromaticPalette } from './createMonochromaticPalette';
 import { createGradientPalette } from './createGradientPalette';
+import { createHueShiftPalette } from './createHueShiftPalette';
 
 export interface GeneratePaletteOptions {
   baseColor?: Color;
@@ -93,6 +94,14 @@ export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
         getRandomColor(),
         getRandomColor()
       );
+
+    case GenerationType.hueShift:
+      return createHueShiftPalette({
+        baseColor: getRandomColor(),
+        minLuminosity: Math.floor(Math.random() * 50),
+        maxLuminosity: Math.floor(Math.random() * 50) + 50,
+        step: 20,
+      });
 
     // // Case Deemed not Ready
     // case GenerationType.discoveryRandom:

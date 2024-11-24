@@ -25,8 +25,8 @@ export enum GenerationType {
   complementary = 'Complementary',
   splitComplementary = 'Split Complementary',
   gradient = 'Gradient',
+  hueShift = 'Hue Shift',
   // discoveryRandom = 'Discovery Random', Not Ready
-  // hueShift = 'hueShift',
 }
 
 export interface PaletteData {
