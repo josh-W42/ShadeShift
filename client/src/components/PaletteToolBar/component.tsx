@@ -2,19 +2,13 @@ import { FunctionComponent } from 'react';
 import { User } from '../../utils';
 import { Link } from 'react-router-dom';
 import { PaletteGenModal } from '../PaletteGenModal';
-import {
-  AppBar,
-  Box,
-  Button,
-  ButtonGroup,
-  IconButton,
-  Tooltip,
-} from '@mui/material';
+import { AppBar, Box, Button, ButtonGroup, Tooltip } from '@mui/material';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { History } from '../../classes';
 
 interface Props {
@@ -36,61 +30,89 @@ export const PaletteToolBarComponent: FunctionComponent<Props> = ({
 }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" id="paletteToolBar" color="secondary">
-        <ButtonGroup variant="contained">
+      <AppBar
+        position="static"
+        sx={{
+          display: 'flex',
+          'flex-direction': 'row',
+          position: 'relative',
+          paddingRight: 1,
+        }}
+        color="secondary"
+      >
+        <Box sx={{ flexGrow: 1 }}></Box>
+        <ButtonGroup variant="text" size={'large'}>
           <Link to={genUrl} tabIndex={-1}>
             <Button
-              sx={{ padding: 1 }}
+              aria-label="Generate Palette"
+              sx={{ padding: 1, textTransform: 'capitalize' }}
               onClick={() => {
                 History.save(window.location.pathname);
               }}
+              startIcon={<AutoAwesomeIcon />}
             >
               Generate
             </Button>
           </Link>
           <PaletteGenModal />
           <Tooltip title="Undo">
-            <IconButton
+            <Button
               aria-label="undo"
+              color="primary"
               disabled={!History.canGoBack()}
               onClick={() => handleUndo(window.location.pathname)}
+              startIcon={<UndoIcon />}
+              sx={{ textTransform: 'capitalize' }}
             >
-              <UndoIcon />
-            </IconButton>
+              Undo
+            </Button>
           </Tooltip>
           <Tooltip title="Redo">
-            <IconButton
+            <Button
               aria-label="redo"
+              color="primary"
               disabled={!History.canGoForward()}
               onClick={() => handleRedo(window.location.pathname)}
+              startIcon={<RedoIcon />}
+              sx={{ textTransform: 'capitalize' }}
             >
-              <RedoIcon />
-            </IconButton>
+              Redo
+            </Button>
           </Tooltip>
           <Tooltip title="View Palette">
-            <IconButton
+            <Button
+              aria-label="View Palette"
+              color="primary"
               onClick={() => {
                 openViewModal();
               }}
+              startIcon={<VisibilityIcon />}
+              sx={{ textTransform: 'capitalize' }}
             >
-              <VisibilityIcon />
-            </IconButton>
+              View
+            </Button>
           </Tooltip>
           {user?.savedPalettes.has(window.location.pathname.slice(1)) ? (
-            <Tooltip title="Un-save Palette">
-              <IconButton>
-                <BookmarkOutlinedIcon />
-              </IconButton>
+            <Tooltip
+              aria-label="Unsave Palette"
+              title="Unsave Palette"
+              sx={{ textTransform: 'capitalize' }}
+            >
+              <Button startIcon={<BookmarkOutlinedIcon />}>Unsave</Button>
             </Tooltip>
           ) : (
             <Tooltip title="Save Palette">
-              <IconButton
+              <Button
+                aria-label="Save Palette"
+                color="primary"
                 onClick={() => {
                   handleSave(window.location.pathname);
                 }}
+                startIcon={<BookmarkBorderOutlinedIcon />}
+                sx={{ textTransform: 'capitalize' }}
               >
-                <BookmarkBorderOutlinedIcon />
-              </IconButton>
+                Save
+              </Button>
             </Tooltip>
           )}
         </ButtonGroup>

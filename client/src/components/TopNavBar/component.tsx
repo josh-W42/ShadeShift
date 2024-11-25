@@ -2,6 +2,7 @@ import {
   AppBar,
   Box,
   Button,
+  ButtonGroup,
   Toolbar,
   Tooltip,
   Typography,
@@ -38,7 +39,6 @@ export const TopNavBarComponent: FC<Props> = ({
         <Tooltip title="Close Palette Library">
           <Button
             sx={{ textTransform: 'capitalize' }}
-            variant="contained"
             onClick={() => toggleDrawer()}
             startIcon={<BookmarksIcon />}
           >
@@ -52,7 +52,6 @@ export const TopNavBarComponent: FC<Props> = ({
       <Tooltip title="Open Palette Library">
         <Button
           sx={{ textTransform: 'capitalize' }}
-          variant="contained"
           onClick={() => toggleDrawer()}
           startIcon={<BookmarksOutlinedIcon />}
         >
@@ -70,53 +69,54 @@ export const TopNavBarComponent: FC<Props> = ({
             Shade Shift
           </Typography>
           <ViewPaletteModal />
-          <SignUpModal />
-          <LoginModal />
-          {user ? (
-            <></>
-          ) : (
-            <>
+          {/* <Box sx={{ flexGrow: 1 }} /> */}
+          <ButtonGroup variant="text" size="large">
+            <SignUpModal />
+            <LoginModal />
+            <Link to={genUrl} tabIndex={-1}>
               <Button
+                onClick={() => {
+                  if (window.location.pathname.includes('-')) {
+                    History.save(window.location.pathname);
+                  }
+                }}
                 sx={{ textTransform: 'capitalize' }}
-                onClick={() => openSignUp()}
-                variant="contained"
               >
-                Sign Up
+                Palette Creator
               </Button>
+            </Link>
+            <Link to={'/image'} tabIndex={-1}>
               <Button
-                sx={{ margin: '0 25px', textTransform: 'capitalize' }}
-                onClick={() => openLogin()}
-                variant="contained"
+                onClick={() => {
+                  History.empty();
+                }}
+                sx={{ textTransform: 'capitalize' }}
               >
-                Login
+                Image Extract
               </Button>
-            </>
-          )}
-          <Link to={genUrl} tabIndex={-1}>
-            <Button
-              onClick={() => {
-                if (window.location.pathname.includes('-')) {
-                  History.save(window.location.pathname);
-                }
-              }}
-              variant="contained"
-              sx={{ textTransform: 'capitalize' }}
-            >
-              Palette Creator
-            </Button>
-          </Link>
-          <Link to={'/image'} tabIndex={-1}>
-            <Button
-              onClick={() => {
-                History.empty();
-              }}
-              variant="contained"
-              sx={{ textTransform: 'capitalize', margin: '0 25px' }}
-            >
-              Image Extract
-            </Button>
-          </Link>
-          {drawerIcon()}
+            </Link>
+            {drawerIcon()}
+          </ButtonGroup>
+          <ButtonGroup variant="text" size="large" sx={{ marginLeft: 2 }}>
+            {user ? (
+              <></>
+            ) : (
+              <>
+                <Button
+                  sx={{ textTransform: 'capitalize' }}
+                  onClick={() => openSignUp()}
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  sx={{ textTransform: 'capitalize' }}
+                  onClick={() => openLogin()}
+                >
+                  Login
+                </Button>
+              </>
+            )}
+          </ButtonGroup>
         </Toolbar>
       </AppBar>
     </Box>
