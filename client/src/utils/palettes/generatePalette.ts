@@ -8,6 +8,7 @@ import { createHueShiftPalette } from './createHueShiftPalette';
 
 export interface GeneratePaletteOptions {
   baseColor?: Color;
+  secondaryColor?: Color;
   type?: GenerationType;
   numColors?: number;
   include?: Color[];
@@ -53,6 +54,14 @@ export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
     opt.type = GenerationType.random;
   }
 
+  if (opt.numColors === undefined) {
+    opt.numColors = Math.floor(Math.random() * 9) + 2;
+  }
+
+  if (opt.secondaryColor === undefined) {
+    opt.secondaryColor = getRandomColor();
+  }
+
   switch (opt.type) {
     case GenerationType.random:
       return generatePalette({
@@ -91,16 +100,17 @@ export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
     case GenerationType.gradient:
       return createGradientPalette(
         opt.numColors,
-        getRandomColor(),
-        getRandomColor()
+        opt.baseColor,
+        opt.secondaryColor
       );
 
     case GenerationType.hueShift:
       return createHueShiftPalette({
-        baseColor: getRandomColor(),
+        baseColor: opt.baseColor,
         minLuminosity: Math.floor(Math.random() * 50),
         maxLuminosity: Math.floor(Math.random() * 50) + 50,
         step: 20,
+        numColors: opt.numColors,
       });
 
     // // Case Deemed not Ready
