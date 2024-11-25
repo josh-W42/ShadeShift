@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import {
   Context,
   DEFAULT_CONFIG,
@@ -14,6 +14,7 @@ import { RootComponent } from './component';
 import Color from 'color';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 
 export const Root: FunctionComponent = () => {
   const [themeOptions, setThemeOptions] = useState(DEFAULT_THEME_OPTIONS);
@@ -28,6 +29,14 @@ export const Root: FunctionComponent = () => {
   const [userDrawerOpen, setUserDrawerOpen] = useState(false);
 
   const theme = createTheme(themeOptions);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.location.pathname === '/') {
+      navigate('/generate');
+    }
+  }, []);
 
   return (
     <Context.Provider
