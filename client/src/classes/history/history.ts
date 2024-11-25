@@ -8,6 +8,7 @@
 export class History {
   private static inStack: string[] = [];
   private static outStack: string[] = [];
+  private static limit = 50;
 
   /**
    * Moves the current sequence backward in the history stack.
@@ -39,7 +40,13 @@ export class History {
    * @param currentSequence The current sequence to save.
    */
   public static save(currentSequence: string) {
+    if (this.inStack.length + this.outStack.length == this.limit) {
+      this.inStack.splice(0, 1);
+    }
+
     this.inStack.push(currentSequence);
+
+    console.log(this.inStack.length + this.outStack.length);
   }
 
   /**
