@@ -114,17 +114,20 @@ export const ColorBlockComponent: FC<Props> = ({
       }}
       key={color.hex()}
     >
-      <Tooltip title="Shades">
-        <IconButton sx={{ borderRadius: 0 }} onClick={() => toggleShowShades()}>
+      <Tooltip title="Shades" placement="right">
+        <IconButton
+          sx={{ borderRadius: 0, width: 'fit-content' }}
+          onClick={() => toggleShowShades()}
+        >
           <TonalityIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Copy">
+      <Tooltip title="Copy" placement="right">
         <IconButton sx={{ borderRadius: 0 }} onClick={() => handleCopy()}>
           <ContentCopyOutlinedIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Remove">
+      <Tooltip title="Remove" placement="right">
         <IconButton sx={{ borderRadius: 0 }} onClick={() => handleRemove()}>
           <CancelOutlinedIcon />
         </IconButton>

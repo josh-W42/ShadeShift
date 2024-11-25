@@ -7,7 +7,7 @@ export const DEFAULT_THEME_OPTIONS: ThemeOptions = {
       main: '#FFBFC6',
       light: '',
       dark: '',
-      contrastText: 'FFFFFF',
+      contrastText: '#000000',
     },
     secondary: {
       main: '#356CB5',

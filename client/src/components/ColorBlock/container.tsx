@@ -30,7 +30,14 @@ export const ColorBlock: FC<Props> = ({
   const { notifications, setNotifications } = useContext(NotificationContext);
   const navigate = useNavigate();
 
-  const shades = createMonochromaticPalette(color, 25);
+  const getShades = () => {
+    if (minimal) {
+      return [];
+    }
+
+    return createMonochromaticPalette(color, 25);
+  };
+
   const handleCopy = () => {
     if (noCopy) return;
 
@@ -83,7 +90,7 @@ export const ColorBlock: FC<Props> = ({
       color={color}
       showShades={showShades}
       toggleShowShades={() => setShowShades(!showShades)}
-      shades={shades}
+      shades={getShades()}
       handleCopy={handleCopy}
       minimal={minimal}
       onClick={onClick}
