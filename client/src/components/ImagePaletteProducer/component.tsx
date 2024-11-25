@@ -5,6 +5,7 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
+  CircularProgress,
   Skeleton,
 } from '@mui/material';
 import Color from 'color';
@@ -71,9 +72,10 @@ export const ImagePaletteProducerComponent: FC<Props> = ({
               component="label"
               role={undefined}
               variant="contained"
-              startIcon={<CloudUpload />}
+              startIcon={isLoading ? <CircularProgress /> : <CloudUpload />}
               size="large"
               tabIndex={-1}
+              disabled={isLoading ? true : false}
             >
               Upload
               <input
@@ -90,7 +92,7 @@ export const ImagePaletteProducerComponent: FC<Props> = ({
               variant="contained"
               onClick={() => handleSubmit()}
             >
-              Create
+              {isLoading ? <CircularProgress size={'30px'} /> : 'Create'}
             </Button>
             <GeneralPaletteMenu palette={colors} IconEl={<SettingsIcon />} />
           </CardActions>
