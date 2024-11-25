@@ -27,7 +27,7 @@ export const GeneralOptions: FC<Props> = ({
   const [numOfColors, setNumOfColors] = numColors;
 
   return (
-    <FormControl>
+    <FormControl sx={{ width: 350 }}>
       <FormControl>
         <FormLabel id="palette-color-label">Base Color</FormLabel>
         <FormControlLabel
@@ -53,7 +53,7 @@ export const GeneralOptions: FC<Props> = ({
           defaultValue={config.color ? `#${config.color}` : `#${color}`}
           disabled={config.color ? false : true}
           placeholder="Type in here…"
-          debounceTimeout={300}
+          debounceTimeout={500}
           handleDebounce={(value) => {
             setColor(value.slice(1));
             setGenConfig({
