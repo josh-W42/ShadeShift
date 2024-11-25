@@ -36,10 +36,11 @@ export const PaletteToolBarComponent: FunctionComponent<Props> = ({
 }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" id="paletteToolBar">
+      <AppBar position="static" id="paletteToolBar" color="secondary">
         <ButtonGroup variant="contained">
           <Link to={genUrl} tabIndex={-1}>
             <Button
+              sx={{ padding: 1 }}
               onClick={() => {
                 History.save(window.location.pathname);
               }}

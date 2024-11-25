@@ -4,6 +4,14 @@
   max-height: 95vh;
 }
 
+a {
+  color: inherit;
+  width: inherit;
+  height: inherit;
+  min-width: inherit;
+  min-height: inherit;
+}
+
 .colorBlock {
   width: 100%;
   text-align: center;

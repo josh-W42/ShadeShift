@@ -4,10 +4,13 @@ export const DEFAULT_THEME_OPTIONS: ThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
-      main: '#1F117B',
+      main: '#FFBFC6',
+      light: '',
+      dark: '',
+      contrastText: 'FFFFFF',
     },
     secondary: {
-      main: '#5B1C67',
+      main: '#356CB5',
     },
   },
 };

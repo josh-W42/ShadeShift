@@ -64,7 +64,7 @@ export const TopNavBarComponent: FC<Props> = ({
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ padding: 1, background: '#00068F' }}>
+      <AppBar position="static" sx={{ padding: 1 }}>
         <Toolbar style={{ minHeight: 0 }}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Shade Shift
@@ -76,11 +76,15 @@ export const TopNavBarComponent: FC<Props> = ({
             <></>
           ) : (
             <>
-              <Button onClick={() => openSignUp()} variant="contained">
-                SignUp
+              <Button
+                sx={{ textTransform: 'capitalize' }}
+                onClick={() => openSignUp()}
+                variant="contained"
+              >
+                Sign Up
               </Button>
               <Button
-                sx={{ margin: '0 25px' }}
+                sx={{ margin: '0 25px', textTransform: 'capitalize' }}
                 onClick={() => openLogin()}
                 variant="contained"
               >

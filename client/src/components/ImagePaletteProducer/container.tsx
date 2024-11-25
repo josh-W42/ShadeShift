@@ -1,11 +1,12 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { ImagePaletteProducerComponent } from './component';
 import Color from 'color';
+import { BASE_SERVER_URL } from '../../utils';
 
 const DEFAULT_IMAGE_URL =
   'https://res.cloudinary.com/dom5vocai/image/upload/f_auto,q_auto/map-min_cgscdw';
 
-const IMAGE_EXTRACT_URL = 'http://localhost:8000/api/images/extract';
+const IMAGE_EXTRACT_URL = BASE_SERVER_URL + 'images/extract';
 
 interface ImageResponseData {
   data: [number, number, number][];
