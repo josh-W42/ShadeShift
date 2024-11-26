@@ -5,8 +5,6 @@ export const DEFAULT_THEME_OPTIONS: ThemeOptions = {
     mode: 'dark',
     primary: {
       main: '#FFBFC6',
-      light: '',
-      dark: '',
       contrastText: '#000000',
     },
     secondary: {
