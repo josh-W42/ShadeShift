@@ -44,23 +44,23 @@ export const createDiscoveryPalette = (
     ColorHarmonyType,
     { colors: ColorAlias[]; variance: number }
   > = {
-    analogous: {
+    Analogous: {
       colors: [] as ColorAlias[],
       variance: Infinity,
     },
-    triadic: {
+    Triadic: {
       colors: [] as ColorAlias[],
       variance: Infinity,
     },
-    tetradic: {
+    Tetradic: {
       colors: [] as ColorAlias[],
       variance: Infinity,
     },
-    complementary: {
+    Complementary: {
       colors: [] as ColorAlias[],
       variance: Infinity,
     },
-    splitComplementary: {
+    'Split Complementary': {
       colors: [] as ColorAlias[],
       variance: Infinity,
     },

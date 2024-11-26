@@ -1,11 +1,11 @@
 import { UserData } from '../user';
 
 export const enum ColorHarmonyType {
-  analogous = 'analogous',
-  triadic = 'triadic',
-  tetradic = 'tetradic',
-  complementary = 'complementary',
-  splitComplementary = 'splitComplementary',
+  analogous = 'Analogous',
+  triadic = 'Triadic',
+  tetradic = 'Tetradic',
+  complementary = 'Complementary',
+  splitComplementary = 'Split Complementary',
 }
 
 export const targetHueSteps = new Map([
