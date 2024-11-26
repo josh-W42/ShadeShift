@@ -16,6 +16,8 @@ import { LoginModal } from '../LogInModal';
 import { User } from '../../utils';
 import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import ImageIcon from '@mui/icons-material/Image';
 
 interface Props {
   genUrl: string;
@@ -81,6 +83,7 @@ export const TopNavBarComponent: FC<Props> = ({
                   }
                 }}
                 sx={{ textTransform: 'capitalize' }}
+                startIcon={<AutoFixHighIcon />}
               >
                 Palette Creator
               </Button>
@@ -91,13 +94,14 @@ export const TopNavBarComponent: FC<Props> = ({
                   History.empty();
                 }}
                 sx={{ textTransform: 'capitalize' }}
+                startIcon={<ImageIcon />}
               >
                 Image Extract
               </Button>
             </Link>
             {drawerIcon()}
           </ButtonGroup>
-          <ButtonGroup variant="text" size="large" sx={{ marginLeft: 2 }}>
+          <ButtonGroup variant="text" size="large" sx={{ marginLeft: 5 }}>
             {user ? (
               <></>
             ) : (

@@ -68,6 +68,16 @@ button {
   text-transform: capitalize;
 }
 
+.colorBlockOption {
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.colorBlock:hover .colorBlockOption {
+  opacity: 100;
+  transition: 0.5s;
+}
+
 .lightShade:hover .hoverHex,
 .lightShade:focus .hoverHex,
 .lightShade:hover .currentShadeIndicator,
