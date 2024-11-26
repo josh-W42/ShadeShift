@@ -116,6 +116,7 @@ export const ColorBlockComponent: FC<Props> = ({
     >
       <Tooltip title="Shades" placement="right">
         <IconButton
+          className="colorBlockOption"
           sx={{ borderRadius: 0, width: 'fit-content' }}
           onClick={() => toggleShowShades()}
         >
@@ -123,12 +124,20 @@ export const ColorBlockComponent: FC<Props> = ({
         </IconButton>
       </Tooltip>
       <Tooltip title="Copy" placement="right">
-        <IconButton sx={{ borderRadius: 0 }} onClick={() => handleCopy()}>
+        <IconButton
+          className="colorBlockOption"
+          sx={{ borderRadius: 0 }}
+          onClick={() => handleCopy()}
+        >
           <ContentCopyOutlinedIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Remove" placement="right">
-        <IconButton sx={{ borderRadius: 0 }} onClick={() => handleRemove()}>
+        <IconButton
+          className="colorBlockOption"
+          sx={{ borderRadius: 0 }}
+          onClick={() => handleRemove()}
+        >
           <CancelOutlinedIcon />
         </IconButton>
       </Tooltip>
