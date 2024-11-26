@@ -1,5 +1,15 @@
 # Shade Shift Front End
 
-## Description:
+## How to Run:
 
-This fun project isn't done yet and there are a few interesting choices I need to change. :)
+To start the project run:
+
+```bash
+npm run dev
+```
+
+To build:
+
+```bash
+npm run build
+```
