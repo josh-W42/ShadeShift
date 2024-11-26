@@ -1,5 +1,5 @@
 import Color from 'color';
-import { ColorHarmonyType, GenerationType } from './types';
+import { ColorHarmonyType, GenerationType, targetHueSteps } from './types';
 import { createScientificPalette } from './createScientificPalette';
 import { getRandomColor } from './getRandomColor';
 import { createMonochromaticPalette } from './createMonochromaticPalette';
@@ -9,6 +9,7 @@ import { createHueShiftPalette } from './createHueShiftPalette';
 export interface GeneratePaletteOptions {
   baseColor?: Color;
   secondaryColor?: Color;
+  hueShiftStep?: number;
   type?: GenerationType;
   numColors?: number;
   include?: Color[];
@@ -16,7 +17,12 @@ export interface GeneratePaletteOptions {
 
 const randomOptions: GenerationType[] = (
   [...Object.values(GenerationType)] as GenerationType[]
-).filter((type) => type != GenerationType.random);
+).filter((type) => {
+  return (
+    type != GenerationType.random &&
+    !targetHueSteps.has(type as unknown as ColorHarmonyType)
+  );
+});
 
 // const examples = '947766-B49D94-4D342C-DFD7D9-7D513C'
 //   .split('-')
@@ -60,6 +66,10 @@ export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
 
   if (opt.secondaryColor === undefined) {
     opt.secondaryColor = getRandomColor();
+  }
+
+  if (opt.hueShiftStep === undefined) {
+    opt.hueShiftStep = Math.floor(Math.random() * 90) + 1;
   }
 
   switch (opt.type) {
@@ -109,7 +119,7 @@ export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
         baseColor: opt.baseColor,
         minLuminosity: Math.floor(Math.random() * 50),
         maxLuminosity: Math.floor(Math.random() * 50) + 50,
-        step: 20,
+        step: opt.hueShiftStep,
         numColors: opt.numColors,
       });
 

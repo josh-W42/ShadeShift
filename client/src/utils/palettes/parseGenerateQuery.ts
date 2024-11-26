@@ -37,6 +37,13 @@ export const parseGenerateQuery: (
       case GenConfigParams.num_colors:
         opts.numColors = parseInt(value);
         break;
+      case GenConfigParams.secondary_color:
+        opts.secondaryColor = Color(`#${value}`);
+        break;
+      case GenConfigParams.hue_shift_step:
+        opts.hueShiftStep = parseInt(value);
+        break;
+
       default:
         break;
     }
