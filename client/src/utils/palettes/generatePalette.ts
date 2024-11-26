@@ -69,7 +69,7 @@ export const generatePalette: (opt?: GeneratePaletteOptions) => Color[] = (
   }
 
   if (opt.hueShiftStep === undefined) {
-    opt.hueShiftStep = Math.floor(Math.random() * 90) + 1;
+    opt.hueShiftStep = Math.floor(Math.random() * 120) + 1;
   }
 
   switch (opt.type) {
