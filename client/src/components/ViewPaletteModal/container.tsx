@@ -2,20 +2,19 @@ import { FC, useContext, useState } from 'react';
 import { ViewPaletteModalComponent } from './component';
 import {
   ColorFormats,
+  Context,
   copyToClipBoard,
   getColorFormat,
-  NotificationContext,
-  PaletteContext,
 } from '../../utils';
 
 export const ViewPaletteModal: FC = () => {
   const [paletteIndex, setPaletteIndex] = useState(0);
-  const { notifications, setNotifications } = useContext(NotificationContext);
-  const { palette, viewModal } = useContext(PaletteContext);
+  const { notifications } = useContext(Context);
+  const { palette, viewModal } = useContext(Context);
 
   const handleCopy = (format: ColorFormats) => {
-    setNotifications([
-      ...notifications,
+    notifications.setNotifications([
+      ...notifications.notifications,
       {
         message: 'Copied to Clipboard',
         severity: 'success',

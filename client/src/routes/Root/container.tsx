@@ -3,10 +3,7 @@ import {
   Context,
   DEFAULT_CONFIG,
   ColorFormats,
-  SecondaryInfoContext,
-  NotificationContext,
   NotificationMessage,
-  PaletteContext,
   User,
   DEFAULT_THEME_OPTIONS,
 } from '../../utils';
@@ -45,43 +42,17 @@ export const Root: FunctionComponent = () => {
         genConfig: { value: genConfig, setConfig: setGenConfig },
         signUpModal: { isOpen: signUpModal, setOpen: setSignUpModal },
         loginModal: { isOpen: loginModal, setOpen: setLoginModal },
-        user: {
-          value: user,
-          setValue: setUser,
-        },
+        user: { value: user, setValue: setUser },
         userDrawerOpen: { isOpen: userDrawerOpen, setOpen: setUserDrawerOpen },
+        viewModal: { isOpen: viewModal, setOpen: setViewModal },
+        palette: { current: currentPalette, setPalette: setCurrentPalette },
+        secondaryInfo: { format, setFormat },
+        notifications: { notifications: pack, setNotifications: setPack },
       }}
     >
-      <SecondaryInfoContext.Provider
-        value={{
-          format,
-          setFormat,
-        }}
-      >
-        <NotificationContext.Provider
-          value={{
-            notifications: pack,
-            setNotifications: setPack,
-          }}
-        >
-          <PaletteContext.Provider
-            value={{
-              palette: {
-                current: currentPalette,
-                setPalette: setCurrentPalette,
-              },
-              viewModal: {
-                isOpen: viewModal,
-                setOpen: setViewModal,
-              },
-            }}
-          >
-            <ThemeProvider theme={theme}>
-              <RootComponent />
-            </ThemeProvider>
-          </PaletteContext.Provider>
-        </NotificationContext.Provider>
-      </SecondaryInfoContext.Provider>
+      <ThemeProvider theme={theme}>
+        <RootComponent />
+      </ThemeProvider>
     </Context.Provider>
   );
 };

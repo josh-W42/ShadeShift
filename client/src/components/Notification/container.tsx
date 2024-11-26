@@ -1,22 +1,22 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { SnackbarCloseReason } from '@mui/material';
-import { NotificationContext, NotificationMessage } from '../../utils';
+import { Context, NotificationMessage } from '../../utils';
 import { NotificationsComponent } from './component';
 
 export const Notifications: FC = () => {
   const [open, setOpen] = useState(false);
-  const { notifications, setNotifications } = useContext(NotificationContext);
+  const { notifications } = useContext(Context);
 
   const [messageInfo, setMessageInfo] = useState<
     NotificationMessage | undefined
   >(undefined);
 
   useEffect(() => {
-    if (notifications.length > 0 && messageInfo === undefined) {
-      setMessageInfo({ ...notifications[0] });
-      setNotifications(notifications.slice(1));
+    if (notifications.notifications.length > 0 && messageInfo === undefined) {
+      setMessageInfo({ ...notifications.notifications[0] });
+      notifications.setNotifications(notifications.notifications.slice(1));
       setOpen(true);
-    } else if (notifications.length > 0 && open) {
+    } else if (notifications.notifications.length > 0 && open) {
       setOpen(false);
     }
   }, [notifications, messageInfo, open]);

@@ -1,10 +1,5 @@
 import { FC, useContext, useState } from 'react';
-import {
-  BASE_SERVER_URL,
-  Context,
-  NotificationContext,
-  UserData,
-} from '../../utils';
+import { BASE_SERVER_URL, Context, UserData } from '../../utils';
 import { LoginModalComponent } from './component';
 
 interface LoginResponse {
@@ -15,7 +10,7 @@ interface LoginResponse {
 
 export const LoginModal: FC = () => {
   const { loginModal, user } = useContext(Context);
-  const { notifications, setNotifications } = useContext(NotificationContext);
+  const { notifications } = useContext(Context);
   const [showPassword, setShowPassword] = useState(false);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -54,8 +49,8 @@ export const LoginModal: FC = () => {
       loginModal.setOpen(false);
     } catch (error) {
       console.error(error);
-      setNotifications([
-        ...notifications,
+      notifications.setNotifications([
+        ...notifications.notifications,
         {
           message: 'Login Failed. Please Try Again.',
           severity: 'error',

@@ -38,36 +38,24 @@ export const Context = createContext({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setOpen: (_n: boolean) => {},
   },
-});
-
-export const SecondaryInfoContext = createContext({
-  format: ColorFormats.rgb,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setFormat: (_c: ColorFormats) => {},
-});
-
-export const NotificationContext = createContext({
-  notifications: [] as NotificationMessage[],
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setNotifications: (_a: NotificationMessage[]) => {},
-});
-
-export const PaletteContext = createContext<{
-  palette: {
-    current: Color[];
-    setPalette: (_p: Color[]) => void;
-  };
-  viewModal: {
-    isOpen: boolean;
-    setOpen: (_b: boolean) => void;
-  };
-}>({
-  palette: {
-    current: [],
-    setPalette: () => {},
-  },
   viewModal: {
     isOpen: false,
-    setOpen: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setOpen: (_n: boolean) => {},
+  },
+  palette: {
+    current: [] as Color[],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setPalette: (_p: Color[]) => {},
+  },
+  secondaryInfo: {
+    format: ColorFormats.rgb,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setFormat: (_c: ColorFormats) => {},
+  },
+  notifications: {
+    notifications: [] as NotificationMessage[],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setNotifications: (_a: NotificationMessage[]) => {},
   },
 });

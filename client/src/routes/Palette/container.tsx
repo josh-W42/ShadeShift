@@ -3,9 +3,9 @@ import { PalettePageComponent } from './component';
 import { useNavigate, useParams } from 'react-router-dom';
 import Color from 'color';
 import {
+  Context,
   generatePalette,
   getSequence,
-  PaletteContext,
   parseGenerateQuery,
 } from '../../utils';
 import { History } from '../../classes';
@@ -13,7 +13,7 @@ import { History } from '../../classes';
 export const PalettePage: FunctionComponent = () => {
   const { sequence } = useParams();
   const [colors, setColors] = useState<Color<string>[]>([]);
-  const { palette: globalPalette } = useContext(PaletteContext);
+  const { palette: globalPalette } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {

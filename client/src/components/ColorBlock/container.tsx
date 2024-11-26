@@ -2,9 +2,9 @@ import { FC, useContext, useState } from 'react';
 import { ColorBlockComponent } from './component';
 import Color from 'color';
 import {
+  Context,
   copyToClipBoard,
   createMonochromaticPalette,
-  NotificationContext,
 } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { History } from '../../classes';
@@ -27,7 +27,7 @@ export const ColorBlock: FC<Props> = ({
   disableFocus,
 }) => {
   const [showShades, setShowShades] = useState(false);
-  const { notifications, setNotifications } = useContext(NotificationContext);
+  const { notifications } = useContext(Context);
   const navigate = useNavigate();
 
   const getShades = () => {
@@ -41,8 +41,8 @@ export const ColorBlock: FC<Props> = ({
   const handleCopy = () => {
     if (noCopy) return;
 
-    setNotifications([
-      ...notifications,
+    notifications.setNotifications([
+      ...notifications.notifications,
       {
         message: 'Copied to Clipboard',
         severity: 'success',

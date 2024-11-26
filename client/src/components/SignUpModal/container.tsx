@@ -1,10 +1,10 @@
 import { FC, useContext, useState } from 'react';
-import { BASE_SERVER_URL, Context, NotificationContext } from '../../utils';
+import { BASE_SERVER_URL, Context } from '../../utils';
 import { SignUpModalComponent } from './component';
 
 export const SignUpModal: FC = () => {
   const { signUpModal } = useContext(Context);
-  const { notifications, setNotifications } = useContext(NotificationContext);
+  const { notifications } = useContext(Context);
   const [showPassword, setShowPassword] = useState(false);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -35,8 +35,8 @@ export const SignUpModal: FC = () => {
       console.log(data);
     } catch (error) {
       console.error(error);
-      setNotifications([
-        ...notifications,
+      notifications.setNotifications([
+        ...notifications.notifications,
         {
           message: 'Login Failed. Please Try Again.',
           severity: 'error',

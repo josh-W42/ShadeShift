@@ -25,12 +25,15 @@ export const NotificationsComponent: FC<Props> = ({
   message,
   severity,
 }) => {
+  console.log(severity);
+
   return (
     <div>
       <Snackbar
         open={open}
         autoHideDuration={2000}
         onClose={handleClose}
+        color="primary"
         action={
           <>
             <IconButton

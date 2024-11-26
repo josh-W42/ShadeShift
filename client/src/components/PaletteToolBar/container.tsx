@@ -1,13 +1,6 @@
 import { FunctionComponent, useContext } from 'react';
 import { PaletteToolBarComponent } from './component';
-import {
-  BASE_SERVER_URL,
-  Context,
-  getGenURL,
-  NotificationContext,
-  PaletteContext,
-  PaletteData,
-} from '../../utils';
+import { BASE_SERVER_URL, Context, getGenURL, PaletteData } from '../../utils';
 import { History } from '../../classes';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,8 +10,8 @@ interface SavePaletteResponse {
 
 export const PaletteToolBar: FunctionComponent = () => {
   const { genConfig, user } = useContext(Context);
-  const { viewModal } = useContext(PaletteContext);
-  const { notifications, setNotifications } = useContext(NotificationContext);
+  const { viewModal } = useContext(Context);
+  const { notifications } = useContext(Context);
   const navigate = useNavigate();
   const genUrl = getGenURL(genConfig.value);
 
@@ -45,8 +38,8 @@ export const PaletteToolBar: FunctionComponent = () => {
 
       if (!response.ok) {
         if (response.status === 401) {
-          setNotifications([
-            ...notifications,
+          notifications.setNotifications([
+            ...notifications.notifications,
             {
               message: 'You Must Login Before Saving!',
               severity: 'error',
@@ -78,8 +71,8 @@ export const PaletteToolBar: FunctionComponent = () => {
       user.setValue({ ...user.value, savedPalettes: newSet });
     } catch (error) {
       console.error(error);
-      setNotifications([
-        ...notifications,
+      notifications.setNotifications([
+        ...notifications.notifications,
         {
           message: 'Failed to Save Palette. Please try again.',
           severity: 'error',
