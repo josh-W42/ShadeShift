@@ -91,8 +91,10 @@ export const ImagePaletteProducerComponent: FC<Props> = ({
               size="large"
               variant="contained"
               onClick={() => handleSubmit()}
+              startIcon={isLoading ? <CircularProgress /> : <></>}
+              disabled={isLoading}
             >
-              {isLoading ? <CircularProgress size={'30px'} /> : 'Create'}
+              Create
             </Button>
             <GeneralPaletteMenu palette={colors} IconEl={<SettingsIcon />} />
           </CardActions>

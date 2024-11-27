@@ -25,8 +25,6 @@ export const NotificationsComponent: FC<Props> = ({
   message,
   severity,
 }) => {
-  console.log(severity);
-
   return (
     <div>
       <Snackbar

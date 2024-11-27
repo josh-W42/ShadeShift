@@ -6,7 +6,7 @@ import { BASE_SERVER_URL } from '../../utils';
 const DEFAULT_IMAGE_URL =
   'https://res.cloudinary.com/dom5vocai/image/upload/f_auto,q_auto/map-min_cgscdw';
 
-const IMAGE_EXTRACT_URL = BASE_SERVER_URL + 'images/extract';
+const IMAGE_EXTRACT_URL = BASE_SERVER_URL + '/images/extract';
 
 interface ImageResponseData {
   data: [number, number, number][];
@@ -73,6 +73,7 @@ export const ImagePaletteProducer: FC = () => {
       setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
