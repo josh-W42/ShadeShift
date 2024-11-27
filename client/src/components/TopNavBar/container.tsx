@@ -1,10 +1,16 @@
 import { useContext } from 'react';
 import { TopNavBarComponent } from './component';
-import { Context, getGenURL } from '../../utils';
+import { BASE_SERVER_URL, Context, getGenURL } from '../../utils';
 
 export const TopNavBar = () => {
-  const { genConfig, signUpModal, loginModal, user, userDrawerOpen } =
-    useContext(Context);
+  const {
+    genConfig,
+    signUpModal,
+    loginModal,
+    user,
+    userDrawerOpen,
+    notifications,
+  } = useContext(Context);
   const genUrl = getGenURL(genConfig.value);
 
   // const handleDb = async () => {
@@ -27,6 +33,28 @@ export const TopNavBar = () => {
   //   }
   // };
 
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(BASE_SERVER_URL + '/logout');
+
+      if (!response.ok) {
+        throw new Error('Failed to logout');
+      }
+
+      user.setValue(undefined);
+    } catch (error) {
+      console.error(error);
+      notifications.setNotifications([
+        ...notifications.notifications,
+        {
+          message: 'Failed to Logout. Please Try Again.',
+          severity: 'error',
+          key: new Date().getTime(),
+        },
+      ]);
+    }
+  };
+
   return (
     <TopNavBarComponent
       genUrl={genUrl}
@@ -37,6 +65,7 @@ export const TopNavBar = () => {
       ]}
       openSignUp={() => signUpModal.setOpen(true)}
       openLogin={() => loginModal.setOpen(true)}
+      handleLogout={handleLogout}
     />
   );
 };

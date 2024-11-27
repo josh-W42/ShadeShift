@@ -25,6 +25,7 @@ interface Props {
   userDrawer: [boolean, () => void];
   openSignUp: () => void;
   openLogin: () => void;
+  handleLogout: () => void;
 }
 
 export const TopNavBarComponent: FC<Props> = ({
@@ -33,6 +34,7 @@ export const TopNavBarComponent: FC<Props> = ({
   userDrawer,
   openSignUp,
   openLogin,
+  handleLogout,
 }) => {
   const [isDrawerOpen, toggleDrawer] = userDrawer;
   const drawerIcon = () => {
@@ -71,7 +73,6 @@ export const TopNavBarComponent: FC<Props> = ({
             Shade Shift
           </Typography>
           <ViewPaletteModal />
-          {/* <Box sx={{ flexGrow: 1 }} /> */}
           <ButtonGroup variant="text" size="large">
             <SignUpModal />
             <LoginModal />
@@ -103,7 +104,14 @@ export const TopNavBarComponent: FC<Props> = ({
           </ButtonGroup>
           <ButtonGroup variant="text" size="large" sx={{ marginLeft: 5 }}>
             {user ? (
-              <></>
+              <Button
+                sx={{ textTransform: 'capitalize' }}
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                Logout
+              </Button>
             ) : (
               <>
                 <Button

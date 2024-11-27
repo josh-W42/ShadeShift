@@ -31,7 +31,7 @@ export const Context = createContext({
   user: {
     value: undefined as undefined | User,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setValue: (_v: User) => {},
+    setValue: (_v: User | undefined) => {},
   },
   userDrawerOpen: {
     isOpen: false,
