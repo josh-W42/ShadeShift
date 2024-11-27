@@ -73,7 +73,8 @@ button {
   transition: 0.5s;
 }
 
-.colorBlock:hover .colorBlockOption {
+.colorBlock:hover .colorBlockOption,
+.colorBlock .colorBlockOption:focus {
   opacity: 100;
   transition: 0.5s;
 }
