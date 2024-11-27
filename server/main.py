@@ -2,7 +2,7 @@ import os
 import time
 
 from flask import request, jsonify, session
-from flask_login import login_required, login_user, current_user
+from flask_login import login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
 from sqlalchemy import select, exists
 
@@ -59,6 +59,16 @@ def login():
         print(e)
         return jsonify({'error': 'Failed to sign up user', 'message': str(e)}), 500
 
+
+@app.route('/api/logout')
+def logout():
+    try:
+        logout_user()
+
+        return jsonify({ 'message': 'success' }), 200
+    except Exception as e:
+        print(e)
+        return jsonify({ 'Error': 'Failed to log out user'  }), 500
 
 @app.route('/api/images/extract', methods=['POST'])
 def upload_image():
