@@ -6,6 +6,7 @@ import {
   NotificationMessage,
   User,
   DEFAULT_THEME_OPTIONS,
+  BASE_SERVER_URL,
 } from '../../utils';
 import { RootComponent } from './component';
 import Color from 'color';
@@ -29,10 +30,42 @@ export const Root: FunctionComponent = () => {
 
   const navigate = useNavigate();
 
+  const pokeServer = async () => {
+    try {
+      const root = BASE_SERVER_URL.split('/api')[0];
+      const response = await fetch(root);
+
+      if (!response.ok) {
+        throw new Error('Server Poke Failed');
+      }
+
+      setPack([
+        ...pack,
+        {
+          message: 'Connected',
+          severity: 'info',
+          key: new Date().getTime(),
+        },
+      ]);
+    } catch (error) {
+      console.error(error);
+      setPack([
+        ...pack,
+        {
+          message: 'Unable to Connect to Server',
+          severity: 'error',
+          key: new Date().getTime(),
+        },
+      ]);
+    }
+  };
+
   useEffect(() => {
     if (window.location.pathname === '/') {
       navigate('/generate');
     }
+
+    pokeServer();
   }, []);
 
   return (

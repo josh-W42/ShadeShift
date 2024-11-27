@@ -45,8 +45,6 @@ export class History {
     }
 
     this.inStack.push(currentSequence);
-
-    console.log(this.inStack.length + this.outStack.length);
   }
 
   /**

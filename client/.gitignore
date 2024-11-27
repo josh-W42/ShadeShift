@@ -24,3 +24,9 @@ dist-ssr
 
 # Envirnment
 .env
+
+#Build
+dist
+
+# Firebase
+.firebase
