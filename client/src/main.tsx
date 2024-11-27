@@ -7,6 +7,28 @@ import { NotFound } from './components/index.ts';
 import './App.css';
 import { ImagePage } from './routes/Image/container.tsx';
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: 'AIzaSyDpqmkdmKMpuQcsM08Ch-9NeCZOdG72Y0I',
+  authDomain: 'shadeshift-e05d4.firebaseapp.com',
+  projectId: 'shadeshift-e05d4',
+  storageBucket: 'shadeshift-e05d4.firebasestorage.app',
+  messagingSenderId: '1093066787554',
+  appId: '1:1093066787554:web:f2d8427e482dc3161c6cbb',
+  measurementId: 'G-CVV82TH1EH',
+};
+
+const app = initializeApp(firebaseConfig);
+// Initialize Firebase
+const analytics = getAnalytics(app);
+
 const router = createBrowserRouter([
   {
     path: '/',
