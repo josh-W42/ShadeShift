@@ -6,20 +6,23 @@ import Divider from '@mui/material/Divider';
 import { FC, ReactElement } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { TopNavBar } from '../TopNavBar';
-import { ListItem, Paper, Typography } from '@mui/material';
+import { IconButton, ListItem, Paper, Typography } from '@mui/material';
 import Color from 'color';
 import { ColorBlock } from '../ColorBlock';
 import { GeneralPaletteMenu } from '../GeneralPaletteMenu';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
   children: ReactElement | undefined;
   open: boolean;
+  toggleOpen: () => void;
   savedPalettes: Color[][];
 }
 
 export const UserDrawerComponent: FC<Props> = ({
   children,
   open,
+  toggleOpen,
   savedPalettes,
 }) => {
   const drawerWidth = open ? 240 : 0;
@@ -70,6 +73,18 @@ export const UserDrawerComponent: FC<Props> = ({
           },
         }}
       >
+        <IconButton
+          sx={{
+            display: 'block',
+            justifySelf: 'right',
+            alignSelf: 'end',
+            width: '40px',
+            height: '40px',
+          }}
+          onClick={() => toggleOpen()}
+        >
+          <CloseIcon />
+        </IconButton>
         <Toolbar />
         <Box
           sx={{

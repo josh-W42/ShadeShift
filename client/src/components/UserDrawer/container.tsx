@@ -27,6 +27,7 @@ export const UserDrawer: FC<Props> = ({ children }) => {
     <UserDrawerComponent
       open={userDrawerOpen.isOpen}
       savedPalettes={getSavedPalettes()}
+      toggleOpen={() => userDrawerOpen.setOpen(!userDrawerOpen.isOpen)}
     >
       {children}
     </UserDrawerComponent>

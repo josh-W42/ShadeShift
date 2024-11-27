@@ -159,3 +159,17 @@ button {
 #paletteLibList .blockHexCode {
   display: none;
 }
+
+#colorBlockBottomBoundary {
+  margin-bottom: 100px;
+}
+
+@media screen and (max-width: 768px) {
+  #colorContainer {
+    flex-direction: column;
+  }
+
+  #colorBlockBottomBoundary {
+    margin-bottom: 0px;
+  }
+}

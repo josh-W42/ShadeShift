@@ -102,7 +102,7 @@ export const TopNavBarComponent: FC<Props> = ({
             </Link>
             {drawerIcon()}
           </ButtonGroup>
-          <ButtonGroup variant="text" size="large" sx={{ marginLeft: 5 }}>
+          <ButtonGroup variant="text" size="large" className="topNavUserGroup">
             {user ? (
               <Button
                 sx={{ textTransform: 'capitalize' }}

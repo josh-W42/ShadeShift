@@ -95,6 +95,7 @@ export const ColorBlockComponent: FC<Props> = ({
             background: color.hex(),
             borderRadius: 0,
             textTransform: 'capitalize',
+            width: '100%',
           }}
           onClick={() => toggleShowShades()}
           startIcon={<TonalityIcon />}
@@ -149,7 +150,7 @@ export const ColorBlockComponent: FC<Props> = ({
         {color.hex().slice(1)}
       </Button>
       <SecondarySettingModal classes={'blockSecondaryInfo'} color={color} />
-      <Box sx={{ marginBottom: 10 }}></Box>
+      <Box id="colorBlockBottomBoundary"></Box>
     </Box>
   );
 };
