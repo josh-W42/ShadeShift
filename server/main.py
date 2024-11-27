@@ -70,6 +70,7 @@ def logout():
         print(e)
         return jsonify({ 'Error': 'Failed to log out user'  }), 500
 
+
 @app.route('/api/images/extract', methods=['POST'])
 def upload_image():
     if 'image' not in request.files:
@@ -100,21 +101,21 @@ def upload_image():
         remove_image(path)
         return jsonify({'error': 'Failed to extract color data from image', 'message': str(e)}), 500
 
-
-@app.route('/api/users')
-def get_users():
-    try:
-        users = [
-            {
-                'id': user.id,
-                'username': user.username,
-                'palettes': [{ 'id': palette.id, 'colors': palette.colors } for palette in user.palettes]
-            } for user in User.query.all()
-        ]
-        return jsonify({'data': users}), 200
-    except Exception as e:
-        print(e)
-        return jsonify({'error': 'Failed to get users', 'message': str(e)}), 500
+# # Debug Route
+# @app.route('/api/users')
+# def get_users():
+#     try:
+#         users = [
+#             {
+#                 'id': user.id,
+#                 'username': user.username,
+#                 'palettes': [{ 'id': palette.id, 'colors': palette.colors } for palette in user.palettes]
+#             } for user in User.query.all()
+#         ]
+#         return jsonify({'data': users}), 200
+#     except Exception as e:
+#         print(e)
+#         return jsonify({'error': 'Failed to get users', 'message': str(e)}), 500
 
 
 @app.route('/api/users', methods=["POST"])
