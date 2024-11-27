@@ -30,7 +30,7 @@ CORS(
     app,
     resources={
         r'/api/*': {
-            "origins": ["http://localhost:5173"]
+            "origins": ["http://localhost:5173", "https://shadeshift-e05d4.web.app/"]
         }
     },
     supports_credentials=True,
