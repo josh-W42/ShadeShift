@@ -26,6 +26,18 @@ export const PaletteToolBar: FunctionComponent = () => {
   };
 
   const handleSave = async (current: string) => {
+    if (user.value === undefined) {
+      notifications.setNotifications([
+        ...notifications.notifications,
+        {
+          message: 'You must sign in to save palettes.',
+          severity: 'error',
+          key: new Date().getTime(),
+        },
+      ]);
+      return;
+    }
+
     try {
       const response = await fetch(BASE_SERVER_URL + '/users/palettes', {
         method: 'POST',
