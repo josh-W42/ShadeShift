@@ -9,9 +9,6 @@ import { ImagePage } from './routes/Image/container.tsx';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 const firebaseConfig = {
   apiKey: 'AIzaSyDpqmkdmKMpuQcsM08Ch-9NeCZOdG72Y0I',
   authDomain: 'shadeshift-e05d4.firebaseapp.com',
