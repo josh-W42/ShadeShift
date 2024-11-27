@@ -29,7 +29,7 @@ login_manager.init_app(app)
 CORS(
     app,
     resources={
-        r'/api/*': {
+        r'/*': {
             "origins": ["http://localhost:5173", "https://shadeshift-e05d4.web.app/"]
         }
     },
