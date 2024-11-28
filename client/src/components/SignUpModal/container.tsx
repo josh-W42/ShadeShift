@@ -1,10 +1,13 @@
 import { FC, useContext, useState } from 'react';
-import { BASE_SERVER_URL, Context } from '../../utils';
+import { BASE_SERVER_URL, Context, UserData } from '../../utils';
 import { SignUpModalComponent } from './component';
 
+interface SignInResponse {
+  data: UserData;
+}
+
 export const SignUpModal: FC = () => {
-  const { signUpModal } = useContext(Context);
-  const { notifications } = useContext(Context);
+  const { signUpModal, notifications, user } = useContext(Context);
   const [showPassword, setShowPassword] = useState(false);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +23,7 @@ export const SignUpModal: FC = () => {
           'Content-Type': 'application/json',
         },
       });
-      const resJSON = await response.json();
+      const resJSON: SignInResponse = await response.json();
 
       if (!response.ok) {
         throw new Error(
@@ -31,8 +34,27 @@ export const SignUpModal: FC = () => {
       }
 
       const { data } = resJSON;
+      const { id, palettes, username } = data;
 
-      console.log(data);
+      user.setValue({
+        id: id,
+        savedPalettes: new Set(palettes.map((palette) => palette.colors)),
+        username: username,
+      });
+
+      notifications.setNotifications([
+        ...notifications.notifications,
+        {
+          message: 'Sign up Success.',
+          severity: 'success',
+          key: new Date().getTime(),
+        },
+      ]);
+
+      setUserName('');
+      setPassword('');
+
+      signUpModal.setOpen(false);
     } catch (error) {
       console.error(error);
       notifications.setNotifications([
