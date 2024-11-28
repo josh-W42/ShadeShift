@@ -3,7 +3,9 @@ import { BASE_SERVER_URL, Context, UserData } from '../../utils';
 import { SignUpModalComponent } from './component';
 
 interface SignInResponse {
-  data: UserData;
+  data: {
+    user: UserData;
+  };
 }
 
 export const SignUpModal: FC = () => {
@@ -34,12 +36,14 @@ export const SignUpModal: FC = () => {
       }
 
       const { data } = resJSON;
-      const { id, palettes, username } = data;
+      const { user: userData } = data;
 
       user.setValue({
-        id: id,
-        savedPalettes: new Set(palettes.map((palette) => palette.colors)),
-        username: username,
+        id: userData.id,
+        savedPalettes: new Set(
+          userData.palettes.map((palette) => palette.colors)
+        ),
+        username: userData.username,
       });
 
       notifications.setNotifications([
