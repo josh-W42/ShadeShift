@@ -26,7 +26,7 @@ f_bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-allowed_origins = ["http://localhost:5173", re.compile(r"https?://shadeshift-e05d4.*\.web\.app/.*")]
+allowed_origins = ["http://localhost:5173", "https://shadeshift-e05d4*.web.app/*", "http://shadeshift-e05d4*.web.app/*"]
 
 CORS(
     app,
