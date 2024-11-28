@@ -46,6 +46,18 @@ export const LoginModal: FC = () => {
         username: username,
       });
 
+      notifications.setNotifications([
+        ...notifications.notifications,
+        {
+          message: 'Login Success.',
+          severity: 'success',
+          key: new Date().getTime(),
+        },
+      ]);
+
+      setUserName('');
+      setPassword('');
+
       loginModal.setOpen(false);
     } catch (error) {
       console.error(error);
