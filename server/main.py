@@ -1,6 +1,8 @@
 import os
 import time
 
+import flask
+from flask_cors import cross_origin
 from flask import request, jsonify, session
 from flask_login import login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
@@ -8,7 +10,7 @@ from sqlalchemy import select, exists
 
 from utils import extract_colors, is_file_allowed, remove_image
 from models import User, Palette
-from config import app, db, login_manager
+from config import app, db, login_manager, allowed_origins
 
 with app.app_context():
     db.create_all()
@@ -28,6 +30,7 @@ def hello_world():
 
 
 @app.route('/api/login', methods=["POST"])
+@cross_origin(origins=allowed_origins)
 def login():
     try:
         data = request.get_json()
@@ -40,7 +43,6 @@ def login():
 
         if user.authenticate(password):
             login_user(user)
-
             return jsonify(
                 {
                     'data': {
@@ -61,6 +63,7 @@ def login():
 
 
 @app.route('/api/logout')
+@cross_origin(origins=allowed_origins)
 def logout():
     try:
         logout_user()
@@ -72,6 +75,7 @@ def logout():
 
 
 @app.route('/api/images/extract', methods=['POST'])
+@cross_origin(origins=allowed_origins)
 def upload_image():
     if 'image' not in request.files:
         return jsonify({'error': 'No image file provided'}), 400
@@ -119,6 +123,7 @@ def upload_image():
 
 
 @app.route('/api/users', methods=["POST"])
+@cross_origin(origins=allowed_origins)
 def user_create():
 
     try:
@@ -140,6 +145,7 @@ def user_create():
 
 @app.route('/api/users/palettes', methods=['POST'])
 @login_required
+@cross_origin(origins=allowed_origins)
 def save_palette():
 
     try:

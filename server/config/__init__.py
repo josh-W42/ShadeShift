@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import Flask
 from flask_cors import CORS
@@ -25,11 +26,15 @@ f_bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+allowed_origins = ["http://localhost:5173", re.compile(r"https?://shadeshift-e05d4.*\.web\.app/.*")]
+
 CORS(
     app,
     supports_credentials=True,
-    origins=["http://localhost:5173", r"https?://shadeshift-e05d4.*\.web\.app/.*"]
+    origins=allowed_origins
 )
+
+
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(base_dir, 'database.db')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
