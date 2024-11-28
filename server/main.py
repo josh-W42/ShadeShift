@@ -30,7 +30,6 @@ def hello_world():
 
 
 @app.route('/api/login', methods=["POST"])
-@cross_origin(origins=allowed_origins)
 def login():
     try:
         data = request.get_json()
@@ -63,7 +62,6 @@ def login():
 
 
 @app.route('/api/logout')
-@cross_origin(origins=allowed_origins)
 def logout():
     try:
         logout_user()
@@ -75,7 +73,6 @@ def logout():
 
 
 @app.route('/api/images/extract', methods=['POST'])
-@cross_origin(origins=allowed_origins)
 def upload_image():
     if 'image' not in request.files:
         return jsonify({'error': 'No image file provided'}), 400
@@ -123,7 +120,6 @@ def upload_image():
 
 
 @app.route('/api/users', methods=["POST"])
-@cross_origin(origins=allowed_origins)
 def user_create():
 
     try:
@@ -145,7 +141,6 @@ def user_create():
 
 @app.route('/api/users/palettes', methods=['POST'])
 @login_required
-@cross_origin(origins=allowed_origins)
 def save_palette():
 
     try:
