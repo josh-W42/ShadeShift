@@ -25,15 +25,10 @@ f_bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
 CORS(
     app,
-    resources={
-        r'/*': {
-            "origins": ["http://localhost:5173", "https://shadeshift-e05d4.web.app/"]
-        }
-    },
     supports_credentials=True,
+    origins=["http://localhost:5173", r"https?://shadeshift-e05d4.*\.web\.app/.*"]
 )
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(base_dir, 'database.db')
@@ -44,4 +39,3 @@ app.config["SESSION_COOKIE_SECURE"] = True
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db.init_app(app)
-
